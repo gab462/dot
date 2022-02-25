@@ -213,7 +213,6 @@
 
    #+begin_src sh :tangle ~/.config/zsh/.aliases
      alias ls='ls --file-type --group-directories-first'
-     alias ls='ls --color=auto'
      alias grep='grep --color=auto'
      alias cp='cp -i'
      alias mv='mv -i'

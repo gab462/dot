@@ -41,7 +41,8 @@
    #+begin_src elisp :tangle ~/.config/emacs/init.el
      (setq kill-whole-line t
            display-time-day-and-date t
-           show-paren-delay 0)
+           show-paren-delay 0
+           custom-file (expand-file-name "custom.el" user-emacs-directory))
 
      (setq-default indent-tabs-mode nil
                    tab-always-indent 'complete

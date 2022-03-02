@@ -4,19 +4,35 @@
 
 ** Early Init
 
-   #+begin_src elisp :tangle ~/.config/emacs/early-init.el
-     (menu-bar-mode -1)
-     (tool-bar-mode -1)
-     (scroll-bar-mode -1)
+*** Aesthetic changes
 
-     ;; (set-face-attribute 'default nil :height 200)
-     (set-face-attribute 'mode-line nil :box nil)
+    #+begin_src elisp :tangle ~/.config/emacs/early-init.el
+      (menu-bar-mode -1)
+      (tool-bar-mode -1)
+      (scroll-bar-mode -1)
 
-     (add-to-list 'initial-frame-alist '(reverse . t))
-     (add-to-list 'initial-frame-alist '(font . "DejaVuSans Mono-18"))
+      ;; (set-face-attribute 'default nil :height 200)
+      (set-face-attribute 'mode-line nil :box nil)
 
-     (setq frame-resize-pixelwise t)
-   #+end_src
+      (add-to-list 'initial-frame-alist '(reverse . t))
+      (add-to-list 'default-frame-alist '(font . "DejaVuSans Mono-18"))
+
+      (setq frame-resize-pixelwise t)
+    #+end_src
+
+*** Speedup initialization
+
+    #+begin_src elisp :tangle ~/.config/emacs/early-init.el
+      (setq gc-cons-threshold (* 50 1000 1000))
+
+      (setq initial-major-mode 'fundamental-mode)
+    #+end_src
+
+    Lower GC threshold after initialization.
+
+    #+begin_src elisp :tangle ~/.config/emacs/init.el
+      (setq gc-cons-threshold (* 2 1000 1000))
+    #+end_src
 
 ** Silence startup screen
 

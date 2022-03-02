@@ -313,7 +313,7 @@
 
 *** qlenv
 
-    Create an isolated quicklisp environment
+    Create an isolated quicklisp environment.
 
     #+begin_src sh :tangle ~/.local/bin/qlenv :shebang "#!/bin/sh"
       FOLDER=".qlenv/"
@@ -339,12 +339,12 @@
 
 *** npm
 
-   #+begin_src conf :tangle ~/.config/npm/npmrc
-     prefix=${XDG_DATA_HOME}/npm
-     cache=${XDG_CACHE_HOME}/npm
-     tmp=${XDG_RUNTIME_DIR}/npm
-     init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
-   #+end_src
+    #+begin_src conf :tangle ~/.config/npm/npmrc
+      prefix=${XDG_DATA_HOME}/npm
+      cache=${XDG_CACHE_HOME}/npm
+      tmp=${XDG_RUNTIME_DIR}/npm
+      init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
+    #+end_src
 
 ** Alacritty
 

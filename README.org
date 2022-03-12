@@ -130,6 +130,15 @@
         "if __name__ == '__main__':" n>
         "main()")
       "py")
+
+     (tempo-define-template
+      "dep"
+      '("{:path [\"src\"]" n>
+        ":mvn/local-repo \".m2\"" n>
+        ":deps {org.clojure/clojure {:mvn/version \"1.10.3\"}}" n>
+        ":aliases {:run {:main-opts [\"-m\" \"" (P "Project name:" project-name) ".core\"]}" n>
+        ":dev {:extra-deps {compliment {:mvn/version \"0.3.12\"}}}}}" n>)
+      "dep")
    #+end_src
 
 ** Major modes

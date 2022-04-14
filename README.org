@@ -6,556 +6,393 @@
 
 *** Aesthetic changes
 
-    #+begin_src elisp :tangle ~/.config/emacs/early-init.el
-      (menu-bar-mode -1)
-      (tool-bar-mode -1)
-      (scroll-bar-mode -1)
+#+begin_src elisp :tangle ~/.config/emacs/early-init.el
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
 
-      ;; (set-face-attribute 'default nil :height 200)
-      (set-face-attribute 'mode-line nil :box nil)
+  ;; (set-face-attribute 'default nil :height 200)
+  (set-face-attribute 'mode-line nil :box nil)
 
-      (add-to-list 'initial-frame-alist '(reverse . t))
-      (add-to-list 'default-frame-alist '(font . "DejaVuSans Mono-18"))
+  (add-to-list 'initial-frame-alist '(reverse . t))
+  (add-to-list 'default-frame-alist '(font . "DejaVuSans Mono-18"))
 
-      (setq frame-resize-pixelwise t)
+  (setq frame-resize-pixelwise t)
 
-      (load-theme 'modus-vivendi t)
-    #+end_src
+  (load-theme 'modus-vivendi t)
+#+end_src
 
 *** Speedup initialization
 
-    #+begin_src elisp :tangle ~/.config/emacs/early-init.el
-      (setq gc-cons-threshold (* 50 1000 1000))
+#+begin_src elisp :tangle ~/.config/emacs/early-init.el
+  (setq gc-cons-threshold (* 50 1000 1000))
 
-      (setq initial-major-mode 'fundamental-mode)
+  (setq initial-major-mode 'fundamental-mode)
 
-      ;; Comment this to be able to load packages
-      (setq package-enable-at-startup nil)
-    #+end_src
+  ;; Comment this to be able to load packages
+  (setq package-enable-at-startup nil)
+#+end_src
 
-    Lower GC threshold after initialization.
+Lower GC threshold after initialization.
 
-    #+begin_src elisp :tangle ~/.config/emacs/init.el
-      (setq gc-cons-threshold (* 2 1000 1000))
-    #+end_src
+#+begin_src elisp :tangle ~/.config/emacs/init.el
+  (setq gc-cons-threshold (* 2 1000 1000))
+#+end_src
 
 ** Silence startup screen
 
-   #+begin_src elisp :tangle ~/.config/emacs/init.el
-     (setq inhibit-startup-screen t
-           inhibit-startup-echo-area-message (user-login-name)
-           initial-scratch-message nil)
+#+begin_src elisp :tangle ~/.config/emacs/init.el
+  (setq inhibit-startup-screen t
+        inhibit-startup-echo-area-message (user-login-name)
+        initial-scratch-message nil)
 
-     (put 'inhibit-startup-echo-area-message 'saved-value t)
-   #+end_src
+  (put 'inhibit-startup-echo-area-message 'saved-value t)
+#+end_src
 
 ** Do not create backup files
 
-   #+begin_src elisp :tangle ~/.config/emacs/init.el
-     (setq make-backup-files nil
-           create-lockfiles nil
-           auto-save-default nil)
-   #+end_src
+#+begin_src elisp :tangle ~/.config/emacs/init.el
+  (setq make-backup-files nil
+        create-lockfiles nil
+        auto-save-default nil)
+#+end_src
 
 ** Misc Settings
 
-   #+begin_src elisp :tangle ~/.config/emacs/init.el
-     (setq kill-whole-line t
-           display-time-day-and-date t
-           show-paren-delay 0)
+#+begin_src elisp :tangle ~/.config/emacs/init.el
+  (setq kill-whole-line t
+        display-time-day-and-date t
+        show-paren-delay 0)
 
-     (setq-default indent-tabs-mode nil
-                   tab-always-indent 'complete
-                   c-default-style "k&r")
+  (setq-default indent-tabs-mode nil
+                tab-always-indent 'complete
+                c-default-style "k&r")
 
-     (put 'dired-find-alternate-file 'disabled nil)
+  (put 'dired-find-alternate-file 'disabled nil)
 
-     (defalias 'yes-or-no-p 'y-or-n-p)
-   #+end_src
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+end_src
 
 ** Utilities
 
-   #+begin_src elisp :tangle ~/.config/emacs/init.el
-     (defun concat-symbol (s1 s2)
-       (car
-        (read-from-string
-         (concat (prin1-to-string s1)
-                 (prin1-to-string s2)))))
+#+begin_src elisp :tangle ~/.config/emacs/init.el
+  (defun concat-symbol (s1 s2)
+    (car
+     (read-from-string
+      (concat (prin1-to-string s1)
+              (prin1-to-string s2)))))
 
-     (defun alist-parse (xf-fn alist)
-       (append '(progn) (mapcar xf-fn alist)))
+  (defun alist-parse (xf-fn alist)
+    (append '(progn) (mapcar xf-fn alist)))
 
-     (defmacro modes (alist)
-       (alist-parse
-        (lambda (kv)
-          (list (concat-symbol (car kv) '-mode) (cdr kv)))
-        alist))
+  (defmacro modes (alist)
+    (alist-parse
+     (lambda (kv)
+       (list (concat-symbol (car kv) '-mode) (cdr kv)))
+     alist))
 
-     (defmacro bindings (alist)
-       (alist-parse
-        (lambda (kv)
-          `(global-set-key (kbd ,(car kv)) ,(cdr kv)))
-        alist))
-   #+end_src
+  (defmacro bindings (alist)
+    (alist-parse
+     (lambda (kv)
+       `(global-set-key (kbd ,(car kv)) ,(cdr kv)))
+     alist))
+#+end_src
 
 ** Tempo Snippets
 
-   #+begin_src elisp :tangle ~/.config/emacs/init.el
-     (require 'tempo)
+#+begin_src elisp :tangle ~/.config/emacs/init.el
+  (require 'tempo)
 
-     (tempo-define-template
-      "sys"
-      '("(in-package :cl-user)" n
-        n
-        "(asdf:defsystem " (P "System name: " system-name) n>
-        ":version \"0.0.0\"" n>
-        ":license \"MIT\"" n>
-        ":components ((:file \"core\"))" n>
-        ":depends-on ())")
-      "sys")
+  (tempo-define-template
+   "sys"
+   '("(in-package :cl-user)" n
+     n
+     "(asdf:defsystem " (P "System name: " system-name) n>
+     ":version \"0.0.0\"" n>
+     ":license \"MIT\"" n>
+     ":components ((:file \"core\"))" n>
+     ":depends-on ())")
+   "sys")
 
-     (tempo-define-template
-      "pkg"
-      '("(in-package :cl-user)" n
-        n
-        "(defsystem " (P "Package name: " package-name) n>
-        "(:use (:cl)))" n>
-        n
-        "(in-package :" (s package-name) ")" n n)
-      "pkg")
+  (tempo-define-template
+   "pkg"
+   '("(in-package :cl-user)" n
+     n
+     "(defsystem " (P "Package name: " package-name) n>
+     "(:use (:cl)))" n>
+     n
+     "(in-package :" (s package-name) ")" n n)
+   "pkg")
 
-     (tempo-define-template
-      "py"
-      '("def main() -> None:" n>
-        "print(\"Hello, World!\")" n
-        n n
-        "if __name__ == '__main__':" n>
-        "main()")
-      "py")
+  (tempo-define-template
+   "py"
+   '("def main() -> None:" n>
+     "print(\"Hello, World!\")" n
+     n n
+     "if __name__ == '__main__':" n>
+     "main()")
+   "py")
 
-     (tempo-define-template
-      "dep"
-      '("{:path [\"src\"]" n>
-        ":mvn/local-repo \".m2\"" n>
-        ":deps {org.clojure/clojure {:mvn/version \"1.10.3\"}}" n>
-        ":aliases {:run {:main-opts [\"-m\" \"" (P "Project name:" project-name) ".core\"]}" n>
-        ":dev {:extra-deps {compliment {:mvn/version \"0.3.12\"}}}}}" n>)
-      "dep")
-   #+end_src
+  (tempo-define-template
+   "dep"
+   '("{:path [\"src\"]" n>
+     ":mvn/local-repo \".m2\"" n>
+     ":deps {org.clojure/clojure {:mvn/version \"1.10.3\"}}" n>
+     ":aliases {:run {:main-opts [\"-m\" \"" (P "Project name:" project-name) ".core\"]}" n>
+     ":dev {:extra-deps {compliment {:mvn/version \"0.3.12\"}}}}}" n>)
+   "dep")
+#+end_src
 
 ** Major modes
 
-   #+begin_src elisp :tangle ~/.config/emacs/init.el
-     (modes
-      ((electric-pair . t)
-       (show-paren . t)
-       (display-time . t)
-       (delete-selection . t)))
-   #+end_src
+#+begin_src elisp :tangle ~/.config/emacs/init.el
+  (modes
+   ((electric-pair . t)
+    (show-paren . t)
+    (display-time . t)
+    (delete-selection . t)))
+#+end_src
 
 ** Keybindings
 
-   #+begin_src elisp :tangle ~/.config/emacs/init.el
-     (bindings
-      (("M-+" . 'raise-sexp)
-       ("M-*" . 'tempo-complete-tag)
-       ;; ("M-_" . 'something)
-       ;; ("M-#" . 'something)
-       ("C-c k" . 'kill-this-buffer)
-       ("C-c a" . 'ff-find-other-file)
-       ("C-c c" . 'compile)
-       ("C-c f" . 'project-find-file)
-       ("C-c m" . 'man)
-       ("C-c n" . 'info-display-manual)
-       ("C-c r" . 'newsticker-show-news)
-       ("C-c i" . (lambda () (interactive)
-                    (find-file (expand-file-name "dot/README.org" (getenv "PROJECTS")))))
-       ("C-c d" . (lambda () (interactive)
-                    (dired (getenv "PROJECTS"))))
-       ("C-c e" . (lambda () (interactive)
-                    (split-window-below -10)
-                    (other-window 1)
-                    (eshell)))
-       ("C-c l" . (lambda () (interactive)
-                    (split-window-below -5)
-                    (other-window 1)
-                    (run-lisp "qlenv repl")))))
-   #+end_src
+#+begin_src elisp :tangle ~/.config/emacs/init.el
+  (bindings
+   (("M-+" . 'raise-sexp)
+    ("M-*" . 'tempo-complete-tag)
+    ;; ("M-_" . 'something)
+    ;; ("M-#" . 'something)
+    ("C-c k" . 'kill-this-buffer)
+    ("C-c a" . 'ff-find-other-file)
+    ("C-c c" . 'compile)
+    ("C-c f" . 'project-find-file)
+    ("C-c m" . 'man)
+    ("C-c n" . 'info-display-manual)
+    ("C-c r" . 'newsticker-show-news)
+    ("C-c i" . (lambda () (interactive)
+                 (find-file (expand-file-name "dot/README.org" (getenv "PROJECTS")))))
+    ("C-c d" . (lambda () (interactive)
+                 (dired (getenv "PROJECTS"))))
+    ("C-c e" . (lambda () (interactive)
+                 (split-window-below -10)
+                 (other-window 1)
+                 (eshell)))
+    ("C-c l" . (lambda () (interactive)
+                 (split-window-below -5)
+                 (other-window 1)
+                 (run-lisp "qlenv repl")))))
+#+end_src
 
 * Shell
 
 ** Environment Variables
 
-   #+begin_src sh :tangle ~/.zshenv
-     export XDG_DATA_HOME=$HOME/.local/share
-     export XDG_CONFIG_HOME=$HOME/.config
-     export XDG_CACHE_HOME=$HOME/.cache
+#+begin_src sh :tangle ~/.zshenv
+  export XDG_DATA_HOME=$HOME/.local/share
+  export XDG_CONFIG_HOME=$HOME/.config
+  export XDG_CACHE_HOME=$HOME/.cache
 
-     export ZDOTDIR=$XDG_CONFIG_HOME/zsh
-     export GTK2_RC_FILES=$XDG_CONFIG_HOME/gtk-2.0/gtkrc
-     export LEIN_HOME=$XDG_DATA_HOME/lein
-     export GNUPGHOME=$XDG_DATA_HOME/gnupg
-     export LESSHISTFILE=-
-     export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
-     export WINEPREFIX=$XDG_DATA_HOME/wineprefixes/default/
-     export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
-     export KIVY_HOME=$XDG_DATA_HOME/kivy
-     export PIPENV_VENV_IN_PROJECT=1
-     export GUILE_AUTO_COMPILE=0
-     export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
-     export EXINIT='set ai nu'
+  export ZDOTDIR=$XDG_CONFIG_HOME/zsh
+  export GTK2_RC_FILES=$XDG_CONFIG_HOME/gtk-2.0/gtkrc
+  export LEIN_HOME=$XDG_DATA_HOME/lein
+  export GNUPGHOME=$XDG_DATA_HOME/gnupg
+  export LESSHISTFILE=-
+  export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
+  export WINEPREFIX=$XDG_DATA_HOME/wineprefixes/default/
+  export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
+  export KIVY_HOME=$XDG_DATA_HOME/kivy
+  export PIPENV_VENV_IN_PROJECT=1
+  export GUILE_AUTO_COMPILE=0
+  export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+  export EXINIT='set ai nu'
 
-     export PATH=$PATH:~/.local/bin/
-     export EDITOR=mg
-     export VISUAL=mg
-     export ALSA_CARD=Headset
+  export PATH=$PATH:~/.local/bin/
+  export EDITOR=mg
+  export VISUAL=mg
+  export ALSA_CARD=Headset
 
-     export KEYTIMEOUT=1
+  export KEYTIMEOUT=1
 
-     export HDD=/home/HDD
-     export DOCUMENTS=/home/HDD/Documents
-     export APPS=/home/HDD/Downloads/Apps
-     export DOWNLOADS=/home/HDD/Downloads
-     export PROJECTS=/home/HDD/Documents/7CC
-   #+end_src
+  export HDD=/home/HDD
+  export DOCUMENTS=/home/HDD/Documents
+  export APPS=/home/HDD/Downloads/Apps
+  export DOWNLOADS=/home/HDD/Downloads
+  export PROJECTS=/home/HDD/Documents/7CC
+#+end_src
 
 ** zsh config
 
-   #+begin_src sh :tangle ~/.config/zsh/.zshrc
-     source $ZDOTDIR/.aliases
+#+begin_src sh :tangle ~/.config/zsh/.zshrc
+  source $ZDOTDIR/.aliases
 
-     setopt COMPLETE_ALIASES
+  setopt COMPLETE_ALIASES
 
-     autoload -Uz compinit
-     compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+  autoload -Uz compinit
+  compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 
-     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-     TYPEWRITTEN_CURSOR=block
-     TYPEWRITTEN_SYMBOL="->"
-     fpath+=$XDG_CONFIG_HOME/zsh/typewritten
+  TYPEWRITTEN_CURSOR=block
+  TYPEWRITTEN_SYMBOL="->"
+  fpath+=$XDG_CONFIG_HOME/zsh/typewritten
 
-     autoload -U promptinit
-     promptinit
-     prompt typewritten
-   #+end_src
+  autoload -U promptinit
+  promptinit
+  prompt typewritten
+#+end_src
 
 ** Aliases
 
-   #+begin_src sh :tangle ~/.config/zsh/.aliases
-     alias ls='ls --file-type --group-directories-first'
-     alias grep='grep --color=auto'
-     alias cp='cp -i'
-     alias mv='mv -i'
+#+begin_src sh :tangle ~/.config/zsh/.aliases
+  alias ls='ls --file-type --group-directories-first'
+  alias grep='grep --color=auto'
+  alias cp='cp -i'
+  alias mv='mv -i'
 
-     ext ()
-     {
-         if [ -f $1 ] ; then
-             case $1 in
-                 ,*.tar.bz2)   tar xjf $1   ;;
-                 ,*.tar.gz)    tar xzf $1   ;;
-                 ,*.bz2)       bunzip2 $1   ;;
-                 ,*.rar)       unrar x $1   ;;
-                 ,*.gz)        gunzip $1    ;;
-                 ,*.tar)       tar xf $1    ;;
-                 ,*.tbz2)      tar xjf $1   ;;
-                 ,*.tgz)       tar xzf $1   ;;
-                 ,*.zip)       unzip $1     ;;
-                 ,*.Z)         uncompress $1;;
-                 ,*.7z)        7z x $1      ;;
-                 ,*.deb)       ar x $1      ;;
-                 ,*.tar.xz)    tar xf $1    ;;
-                 ,*.tar.zst)   unzstd $1    ;;
-                 ,*)           echo "'$1' cannot be extracted via ex()" ;;
-             esac
-         else
-             echo "'$1' is not a valid file"
-         fi
-     }
+  ext ()
+  {
+      if [ -f $1 ] ; then
+          case $1 in
+              ,*.tar.bz2)   tar xjf $1   ;;
+              ,*.tar.gz)    tar xzf $1   ;;
+              ,*.bz2)       bunzip2 $1   ;;
+              ,*.rar)       unrar x $1   ;;
+              ,*.gz)        gunzip $1    ;;
+              ,*.tar)       tar xf $1    ;;
+              ,*.tbz2)      tar xjf $1   ;;
+              ,*.tgz)       tar xzf $1   ;;
+              ,*.zip)       unzip $1     ;;
+              ,*.Z)         uncompress $1;;
+              ,*.7z)        7z x $1      ;;
+              ,*.deb)       ar x $1      ;;
+              ,*.tar.xz)    tar xf $1    ;;
+              ,*.tar.zst)   unzstd $1    ;;
+              ,*)           echo "'$1' cannot be extracted via ex()" ;;
+          esac
+      else
+          echo "'$1' is not a valid file"
+      fi
+  }
 
-     count() {
-         COUNT=0
-         echo 0
-         while true; do
-             sleep 1
-             let COUNT=COUNT+1
-             echo "\e[1A\e[K$COUNT"
-         done
-     }
-   #+end_src
+  count() {
+      COUNT=0
+      echo 0
+      while true; do
+          sleep 1
+          let COUNT=COUNT+1
+          echo "\e[1A\e[K$COUNT"
+      done
+  }
+#+end_src
 
 ** Scripts
 
 *** qlenv
 
-    Create an isolated quicklisp environment.
+Create an isolated quicklisp environment.
 
-    #+begin_src sh :tangle ~/.local/bin/qlenv :shebang "#!/bin/sh"
-      FOLDER=".qlenv/"
-      QLURL="https://beta.quicklisp.org/quicklisp.lisp"
-      QLFILE="$FOLDER""quicklisp.lisp"
-      QLFOLDER="$FOLDER""quicklisp/"
-      SETUPFILE="$QLFOLDER""setup.lisp"
-      THISFOLDER=$(pwd)"/"
+#+begin_src sh :tangle ~/.local/bin/qlenv :shebang "#!/bin/sh"
+  FOLDER=".qlenv/"
+  QLURL="https://beta.quicklisp.org/quicklisp.lisp"
+  QLFILE="$FOLDER""quicklisp.lisp"
+  QLFOLDER="$FOLDER""quicklisp/"
+  SETUPFILE="$QLFOLDER""setup.lisp"
+  THISFOLDER=$(pwd)"/"
 
-      case $1 in
-          init)
-              mkdir .qlenv
-              curl $QLURL -so $QLFILE
-              sbcl --script <(echo "(load \"$QLFILE\") (quicklisp-quickstart:install :path \"$QLFOLDER\")")
-              ;;
-          repl)
-              sbcl --load $SETUPFILE --eval "(push \"$THISFOLDER\" asdf:*central-registry*)"
-              ;;
-      esac
-    #+end_src
+  case $1 in
+      init)
+          mkdir .qlenv
+          curl $QLURL -so $QLFILE
+          sbcl --script <(echo "(load \"$QLFILE\") (quicklisp-quickstart:install :path \"$QLFOLDER\")")
+          ;;
+      repl)
+          sbcl --load $SETUPFILE --eval "(push \"$THISFOLDER\" asdf:*central-registry*)"
+          ;;
+  esac
+#+end_src
 
 ** XDG Base Directory
 
 *** npm
 
-    #+begin_src conf :tangle ~/.config/npm/npmrc
-      prefix=${XDG_DATA_HOME}/npm
-      cache=${XDG_CACHE_HOME}/npm
-      tmp=${XDG_RUNTIME_DIR}/npm
-      init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
-    #+end_src
+#+begin_src conf :tangle ~/.config/npm/npmrc
+  prefix=${XDG_DATA_HOME}/npm
+  cache=${XDG_CACHE_HOME}/npm
+  tmp=${XDG_RUNTIME_DIR}/npm
+  init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
+#+end_src
 
 ** Alacritty
 
-   #+begin_src yml :tangle ~/.config/alacritty/alacritty.yml
-     font:
-       normal:
-         family: Terminus
-         style: Regular
+#+begin_src yml :tangle ~/.config/alacritty/alacritty.yml
+  font:
+    normal:
+      family: Terminus
+      style: Regular
 
-       bold:
-         family: Terminus
-         style: Bold
+    bold:
+      family: Terminus
+      style: Bold
 
-       italic:
-         family: Terminus
-         style: Italic
+    italic:
+      family: Terminus
+      style: Italic
 
-       bold_italic:
-         family: Terminus
-         style: Bold Italic
+    bold_italic:
+      family: Terminus
+      style: Bold Italic
 
-       size: 23
+    size: 23
 
-     # XTerm's default colors
-     colors:
-       # Default colors
-       primary:
-         background: '0x000000'
-         foreground: '0xffffff'
-       # Normal colors
-       normal:
-         black:   '0x000000'
-         red:     '0xcd0000'
-         green:   '0x00cd00'
-         yellow:  '0xcdcd00'
-         blue:    '0x0000ee'
-         magenta: '0xcd00cd'
-         cyan:    '0x00cdcd'
-         white:   '0xe5e5e5'
+  # XTerm's default colors
+  colors:
+    # Default colors
+    primary:
+      background: '0x000000'
+      foreground: '0xffffff'
+    # Normal colors
+    normal:
+      black:   '0x000000'
+      red:     '0xcd0000'
+      green:   '0x00cd00'
+      yellow:  '0xcdcd00'
+      blue:    '0x0000ee'
+      magenta: '0xcd00cd'
+      cyan:    '0x00cdcd'
+      white:   '0xe5e5e5'
 
-       # Bright colors
-       bright:
-         black:   '0x7f7f7f'
-         red:     '0xff0000'
-         green:   '0x00ff00'
-         yellow:  '0xffff00'
-         blue:    '0x5c5cff'
-         magenta: '0xff00ff'
-         cyan:    '0x00ffff'
-         white:   '0xffffff'
-   #+end_src
+    # Bright colors
+    bright:
+      black:   '0x7f7f7f'
+      red:     '0xff0000'
+      green:   '0x00ff00'
+      yellow:  '0xffff00'
+      blue:    '0x5c5cff'
+      magenta: '0xff00ff'
+      cyan:    '0x00ffff'
+      white:   '0xffffff'
+#+end_src
 
 ** Vim
 
-   #+begin_src vim :tangle ~/.vimrc
-     set nocompatible
+#+begin_src vim :tangle ~/.vimrc
+  set nocompatible
 
-     let g:netrw_dirhistmax = 0
-     set viminfofile=NONE
-     set clipboard=exclude:.*
+  let g:netrw_dirhistmax = 0
+  set viminfofile=NONE
+  set clipboard=exclude:.*
 
-     filetype plugin indent on
+  filetype plugin indent on
 
-     syntax on
-     set bg=dark
-     let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-     let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-     set termguicolors
+  syntax on
+  set bg=dark
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
 
-     set expandtab
-     set timeout
-     set ttimeoutlen=0
-     set noswapfile nowritebackup nobackup
-     set autoindent
-     set incsearch ignorecase smartcase
-   #+end_src
-
-* Window Manager
-
-** bspwm config
-
-   #+begin_src sh :tangle ~/.config/bspwm/bspwmrc :shebang "#!/bin/sh"
-     pgrep -x sxhkd > /dev/null || sxhkd &
-
-     xsetroot -cursor_name left_ptr &
-     xset s off &
-     xset -dpms &
-     setxkbmap -option ctrl:nocaps &
-     nitrogen --restore &
-
-     bspc monitor -d I II III IV V VI VII VIII IX X
-
-     bspc config border_width         5
-     bspc config window_gap          10
-     # bspc config top_padding         30
-
-     bspc config split_ratio          0.50
-     bspc config borderless_monocle   true
-     bspc config gapless_monocle      true
-
-     bspc config pointer_modifier mod4
-     bspc config pointer_action1 move
-     bspc config pointer_action2 resize_side
-     bspc config pointer_action3 resize_corner
-
-     bspc config normal_border_color  \#484848
-     bspc config focused_border_color \#FFFFFF
-     bspc config urgent_border_color \#B58900
-     bspc config presel_border_color \#000000
-
-     bspc rule -a Emacs state=tiled
-   #+end_src
-
-** sxhkd
-
-   #+begin_src sh :tangle ~/.config/sxhkd/sxhkdrc
-     super + Return
-             alacritty
-
-     super + d
-             dmenu_run -h 30 -fn 'DejaVu Sans Mono'
-
-     super + b
-             qutebrowser
-
-     super + e
-             pcmanfm
-
-     super + control + e
-             emacs
-
-     super + x
-             scrot /home/HDD/Pictures/Screenshots/%m%d-%H%M%S.png
-
-     # make sxhkd reload its configuration files:
-     super + Escape
-             pkill -USR1 -x sxhkd
-
-     super + v
-             amixer set Headphone 5%+
-
-     super + shift + v
-             amixer set Headphone 5%-
-
-     super + control + v
-             amixer set Headphone toggle
-
-     Print
-             import png:- | xclip -selection clipboard -t image/png
-
-     alt + Print
-             import png:- | xclip -selection clipboard -t image/png
-
-     # quit/restart bspwm
-     super + alt + r
-             bspc wm -r
-
-     # close and kill
-     super + q
-             bspc node -c
-
-     # alternate between the tiled and monocle layout
-     super + shift + m
-             bspc desktop -l next
-
-     # send the newest marked node to the newest preselected node
-     super + y
-             bspc node newest.marked.local -n newest.!automatic.local
-
-     # swap the current node and the biggest window
-     super + m
-             bspc node -s biggest.window
-
-     # set the window state
-     super + {t,shift + t,s,f}
-             bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
-
-     # set the node flags
-     super + ctrl + {m,x,y,z}
-             bspc node -g {marked,locked,sticky,private}
-
-     # focus the node in the given direction
-     super + {_,shift + }{h,j,k,l}
-             bspc node -{f,s} {west,south,north,east}
-
-     # focus the node for the given path jump
-     super + {p,b,comma,period}
-             bspc node -f @{parent,brother,first,second}
-
-     # focus the next/previous window in the current desktop
-     super + {_,shift + }c
-             bspc node -f {next,prev}.local.!hidden.window
-
-     # focus the next/previous desktop in the current monitor
-     super + bracket{left,right}
-             bspc desktop -f {prev,next}.local
-
-     # focus the last node/desktop
-     super + {grave,Tab}
-             bspc {node,desktop} -f last
-
-     # focus the older or newer node in the focus history
-     super + {o,i}
-             bspc wm -h off; \
-             bspc node {older,newer} -f; \
-             bspc wm -h on
-
-     # focus or send to the given desktop
-     super + {_,shift + }{1-9,0}
-             bspc {desktop -f,node -d} '^{1-9,10}'
-
-     # preselect the direction
-     super + ctrl + {h,j,k,l}
-             bspc node -p {west,south,north,east}
-
-     # preselect the ratio
-     super + ctrl + {1-9}
-             bspc node -o 0.{1-9}
-
-     # cancel the preselection for the focused node
-     super + ctrl + space
-             bspc node -p cancel
-
-     # cancel the preselection for the focused desktop
-     super + ctrl + shift + space
-             bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-
-     # expand a window by moving one of its side outward
-     super + alt + {h,j,k,l}
-             bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
-
-     # contract a window by moving one of its side inward
-     super + alt + shift + {h,j,k,l}
-             bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
-
-     # move a floating window
-     super + {Left,Down,Up,Right}
-             bspc node -v {-20 0,0 20,0 -20,20 0}
-   #+end_src
+  set expandtab
+  set timeout
+  set ttimeoutlen=0
+  set noswapfile nowritebackup nobackup
+  set autoindent
+  set incsearch ignorecase smartcase
+#+end_src

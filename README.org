@@ -163,7 +163,7 @@ Lower GC threshold after initialization.
     ("C-c d" . (lambda () (interactive)
                  (dired (getenv "PROJECTS"))))
     ("C-c l" . (lambda () (interactive)
-                 (split-window-below -5)
+                 (split-window-below -10)
                  (other-window 1)
                  (run-lisp "qlenv repl")))))
 #+end_src
@@ -299,6 +299,8 @@ Create an isolated quicklisp environment.
   tmp=${XDG_RUNTIME_DIR}/npm
   init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
 #+end_src
+
+* Apps
 
 ** Alacritty
 

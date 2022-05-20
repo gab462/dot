@@ -1,174 +1,5 @@
 #+PROPERTY: :mkdirp yes
 
-* Emacs
-
-** Early Init
-
-*** Aesthetic changes
-
-#+begin_src elisp :tangle ~/.config/emacs/early-init.el
-  (menu-bar-mode -1)
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1)
-
-  ;; (set-face-attribute 'default nil :height 200)
-  (set-face-attribute 'mode-line nil :box nil)
-
-  (add-to-list 'default-frame-alist '(font . "DejaVuSans Mono-18"))
-
-  (setq frame-resize-pixelwise t)
-
-  (load-theme 'modus-vivendi t)
-#+end_src
-
-*** Speedup initialization
-
-#+begin_src elisp :tangle ~/.config/emacs/early-init.el
-  (setq gc-cons-threshold (* 50 1000 1000))
-
-  (setq initial-major-mode 'fundamental-mode)
-
-  ;; Comment this to be able to load packages
-  (setq package-enable-at-startup nil)
-#+end_src
-
-Lower GC threshold after initialization.
-
-#+begin_src elisp :tangle ~/.config/emacs/init.el
-  (setq gc-cons-threshold (* 2 1000 1000))
-#+end_src
-
-** Silence startup screen
-
-#+begin_src elisp :tangle ~/.config/emacs/init.el
-  (setq inhibit-startup-screen t
-        inhibit-startup-echo-area-message (user-login-name)
-        initial-scratch-message nil)
-
-  (put 'inhibit-startup-echo-area-message 'saved-value t)
-#+end_src
-
-** Do not create backup files
-
-#+begin_src elisp :tangle ~/.config/emacs/init.el
-  (setq make-backup-files nil
-        create-lockfiles nil
-        auto-save-default nil)
-#+end_src
-
-** Misc Settings
-
-#+begin_src elisp :tangle ~/.config/emacs/init.el
-  (setq kill-whole-line t
-        display-time-day-and-date t
-        show-paren-delay 0)
-
-  (setq-default indent-tabs-mode nil
-                tab-always-indent 'complete
-                c-default-style "k&r")
-
-  (put 'dired-find-alternate-file 'disabled nil)
-
-  (defalias 'yes-or-no-p 'y-or-n-p)
-#+end_src
-
-** Utilities
-
-#+begin_src elisp :tangle ~/.config/emacs/init.el
-  (defun concat-symbol (s1 s2)
-    (car
-     (read-from-string
-      (concat (prin1-to-string s1)
-              (prin1-to-string s2)))))
-
-  (defun alist-parse (xf-fn alist)
-    (append '(progn) (mapcar xf-fn alist)))
-
-  (defmacro modes (alist)
-    (alist-parse
-     (lambda (kv)
-       (list (concat-symbol (car kv) '-mode) (cdr kv)))
-     alist))
-
-  (defmacro bindings (alist)
-    (alist-parse
-     (lambda (kv)
-       `(global-set-key (kbd ,(car kv)) ,(cdr kv)))
-     alist))
-#+end_src
-
-** Tempo Snippets
-
-#+begin_src elisp :tangle ~/.config/emacs/init.el
-  (require 'tempo)
-
-  (tempo-define-template
-   "cls"
-   '("(in-package :cl-user)" n
-     n
-     "(asdf:defsystem " (P "System name: " system-name) n>
-     ":serial t" n>
-     ":version \"0.0.0\"" n>
-     ":license \"MIT\"" n>
-     ":components ((:file \"core\"))" n>
-     ":depends-on ())")
-   "cls")
-
-  (tempo-define-template
-   "clp"
-   '("(in-package :cl-user)" n
-     n
-     "(defpackage " (P "Package name: " package-name) n>
-     "(:use :cl))" n>
-     n
-     "(in-package :" (s package-name) ")" n n)
-   "clp")
-
-  (tempo-define-template
-   "pym"
-   '("def main() -> None:" n>
-     "print(\"Hello, World!\")" n
-     n n
-     "if __name__ == '__main__':" n>
-     "main()")
-   "pym")
-#+end_src
-
-** Major modes
-
-#+begin_src elisp :tangle ~/.config/emacs/init.el
-  (modes
-   ((electric-pair . t)
-    (show-paren . t)
-    (display-time . t)
-    (delete-selection . t)))
-#+end_src
-
-** Keybindings
-
-#+begin_src elisp :tangle ~/.config/emacs/init.el
-  (bindings
-   (("M-+" . 'raise-sexp)
-    ("M-*" . 'tempo-complete-tag)
-    ;; ("M-_" . 'something)
-    ;; ("M-#" . 'something)
-    ("C-c k" . 'kill-this-buffer)
-    ("C-c a" . 'ff-find-other-file)
-    ("C-c c" . 'compile)
-    ("C-c f" . 'project-find-file)
-    ("C-c m" . 'man)
-    ("C-c n" . 'info-display-manual)
-    ("C-c e" . 'eshell)
-    ("C-c i" . (lambda () (interactive)
-                 (find-file (expand-file-name "dot/README.org" (getenv "PROJECTS")))))
-    ("C-c d" . (lambda () (interactive)
-                 (dired (getenv "PROJECTS"))))
-    ("C-c l" . (lambda () (interactive)
-                 (split-window-below -10)
-                 (other-window 1)
-                 (run-lisp "qlenv repl")))))
-#+end_src
-
 * Shell
 
 ** Environment Variables
@@ -303,6 +134,63 @@ Create an isolated quicklisp environment.
 
 * Apps
 
+** Emacs
+
+#+begin_src elisp :tangle ~/.config/emacs/init.el
+  (set-face-attribute 'default nil :family "Liberation Mono" :height 180)
+
+  (when (eq system-type 'windows-nt)
+    (add-hook 'window-setup-hook 'toggle-frame-maximized t))
+
+  (setq make-backup-files nil
+        create-lockfiles nil
+        auto-save-default nil)
+
+  (setq kill-whole-line t
+        show-paren-delay 0
+        ring-bell-function 'ignore)
+
+  (setq-default tab-always-indent 'complete
+            indent-tabs-mode nil
+            c-default-style "k&r")
+
+  (put 'dired-find-alternate-file 'disabled nil)
+
+  (defalias 'yes-or-no-p 'y-or-n-p)
+
+  (electric-pair-mode t)
+  (delete-selection-mode t)
+  (show-paren-mode t)
+
+  ;; Packages
+  ;; Bindable editing keys: C-= C-. C-, C-; C-'
+
+  (require 'package)
+
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
+  (add-to-list 'package-selected-packages 'expand-region)
+  (when (require 'expand-region nil t)
+    (global-set-key (kbd "C-=") 'er/expand-region))
+
+  (add-to-list 'package-selected-packages 'multiple-cursors)
+  (when (require 'multiple-cursors nil t)
+    (setq mc/always-run-for-all t)
+    (global-set-key (kbd "C-.") 'mc/mark-next-like-this)
+    (global-set-key (kbd "C-,") 'mc/mark-all-like-this))
+
+  (add-to-list 'package-selected-packages 'avy)
+  (when (require 'avy nil t)
+    (global-set-key (kbd "C-;") 'avy-goto-char-2))
+
+  (add-to-list 'package-selected-packages 'ace-window)
+  (when (require 'ace-window nil t)
+    (global-set-key (kbd "C-'") 'ace-window))
+
+  ;; Maybe: Smartparen/Paredit, EXWM
+  ;; Prob. not: Magit, Elfeed
+#+end_src
+
 ** Alacritty
 
 #+begin_src yml :tangle ~/.config/alacritty/alacritty.yml
@@ -407,3 +295,4 @@ Create an isolated quicklisp environment.
   c.colors.downloads.system.bg = 'none'
   c.colors.tabs.indicator.system = 'none'
 #+end_src
+

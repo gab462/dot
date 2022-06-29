@@ -5,21 +5,6 @@
 ** Emacs
 
 #+begin_src elisp :tangle ~/.config/emacs/init.el
-  ;; Aesthetics
-
-  (scroll-bar-mode -1)
-  (tool-bar-mode -1)
-  (menu-bar-mode -1)
-
-  ;; (load-theme 'leuven-dark)
-  ;; (load-theme 'modus-vivendi)
-
-  (set-face-attribute 'default nil :family "Liberation Mono" :height 180)
-  (set-face-attribute 'mode-line nil :box nil)
-
-  (when (eq system-type 'windows-nt)
-    (add-hook 'window-setup-hook 'toggle-frame-maximized t))
-
   ;; Options
 
   (setq make-backup-files nil

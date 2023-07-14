@@ -17,12 +17,13 @@ set $menu bemenu-run --line-height=30 --fn 'Hermit 18' --tb "$bg" --tf "$yellow"
 
 include /etc/sway/config-vars.d/*
 
-output * bg /home/me/opt/walllapers/gruvbox-abstract-shapes.png fill
+#output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg /usr/share/desktop-base/emerald-theme/wallpaper/contents/images/1920x1080.svg fill
 
 exec swayidle -w \
-         timeout 300 'swaylock --image /home/me/opt/walllapers/gruvbox-pacman.png --font Hermit -f' \
+         timeout 300 'swaylock --image /usr/share/desktop-base/emerald-theme/plymouth/Emerald_plymouth.svg --font Hermit -f' \
          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock --image /home/me/opt/walllapers/gruvbox-pacman.png --font Hermit -f'
+         before-sleep 'swaylock --image /usr/share/desktop-base/emerald-theme/plymouth/Emerald_plymouth.svg --font Hermit -f'
 
 input "6940:7087:Corsair_CORSAIR_K65_RGB_MINI_60%_Mechanical_Gaming_Keyboard" {
     xkb_options ctrl:nocaps

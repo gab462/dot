@@ -1,12 +1,12 @@
 # Debian sid
 
 # Essential
-doas, alsa-utils
-htop, neofetch, firefox
+doas alsa-utils man
+htop neofetch firefox
 # Wayland desktop
 desktop-base sway swayidle swaylock swayimg sway-backgrounds grimshot mako-notifier foot foot-themes bemenu fonts-hermit
 xdg-desktop-portal-wlr polkitd-pkla wireplumber rtkit
 intel-media-va-driver
 # Programming
-build-essential, git, indent, gdb, python3
+build-essential git indent gdb python3
 clang(-14) lld(-14)

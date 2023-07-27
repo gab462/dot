@@ -2,7 +2,7 @@
 
 ## Essential
 doas alsa-utils man-db
-htop neofetch firefox
+htop neofetch firefox systemd-timesyncd
 
 ## Wayland desktop
 desktop-base sway swayidle swaylock swayimg sway-backgrounds grimshot mako-notifier foot foot-themes bemenu

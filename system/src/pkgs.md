@@ -1,7 +1,7 @@
 # Debian sid
 
 ## Essential
-doas alsa-utils man-db
+doas alsa-utils man-db manpages-dev
 htop neofetch firefox systemd-timesyncd
 
 ## Wayland desktop

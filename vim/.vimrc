@@ -24,4 +24,5 @@ colorscheme quiet
 
 set wildmenu
 set wildignore=*.o
-nnoremap <C-p> :e **/*
+set path=**
+nnoremap <C-p> :find *

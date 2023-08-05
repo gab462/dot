@@ -23,4 +23,5 @@ autocmd Colorscheme quiet hi Normal ctermbg=NONE
 colorscheme quiet
 
 set wildmenu
+set wildignore=*.o
 nnoremap <C-p> :e **/*

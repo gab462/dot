@@ -15,12 +15,10 @@ set noswapfile nowritebackup nobackup
 set ai si
 set incsearch ignorecase smartcase
 
-autocmd Colorscheme quiet hi Normal ctermbg=NONE
-            \ | hi Comment ctermfg=lightgreen
-            \ | hi String ctermfg=lightblue
-            \ | hi Character ctermfg=lightblue
-            \ | hi PreProc ctermfg=lightred
-colorscheme quiet
+autocmd Colorscheme zaibatsu hi Normal ctermbg=NONE
+			\ | hi EndOfBuffer ctermbg=NONE
+colorscheme zaibatsu
+let g:loaded_matchparen = 1
 
 set wildmenu
 set wildignore=*.o

@@ -11,4 +11,3 @@ intel-media-va-driver
 
 ## Programming
 build-essential git indent gdb
-libwayland-dev wayland-protocols

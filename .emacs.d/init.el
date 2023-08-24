@@ -101,3 +101,5 @@
 
 (use-package expreg
   :bind (("C-=" . expreg-expand)))
+
+(use-package magit)

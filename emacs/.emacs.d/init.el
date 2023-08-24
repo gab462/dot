@@ -1,0 +1,103 @@
+;; Options
+
+(setq make-backup-files nil
+      create-lockfiles nil
+      auto-save-default nil
+      auto-save-list-file-prefix nil)
+
+(setq inhibit-startup-screen t
+      inhibit-startup-echo-area-message (user-login-name)
+      initial-scratch-message nil)
+
+(put 'inhibit-startup-echo-area-message 'saved-value t)
+
+(setq kill-whole-line t
+      show-paren-delay 0
+      ring-bell-function 'ignore)
+
+(setq browse-url-browser-function 'eww-browse-url
+      shr-inhibit-images t
+      shr-use-fonts nil
+      shr-use-colors nil
+      shr-cookie-policy nil
+      eww-history-limit -1
+      shr-indentation 2
+      shr-width 70)
+
+(setq-default tab-always-indent 'complete
+              indent-tabs-mode nil
+              c-default-style "gnu")
+
+(setq straight-use-package-by-default t)
+;; (setq use-package-always-ensure t)
+
+(put 'dired-find-alternate-file 'disabled nil)
+
+;; Minor modes
+
+(electric-pair-mode t)
+(delete-selection-mode t)
+(show-paren-mode t)
+
+;; (windmove-default-keybindings)
+
+;; Remaps / Aliases
+
+;; Used keybindings: C-= C-, C-. C-; C-' M-*
+;; Unused editing keybindings: M-+ M-_ M-#
+;; C-z - remappable as already bound to C-x C-z
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+(global-set-key (kbd "M-/") 'hippie-expand)
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
+
+;; (global-set-key (kbd "C-=") 'mark-sexp)
+(global-set-key (kbd "M-*") 'raise-sexp)
+
+;; Packages
+
+;; Install straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+(use-package no-littering
+  :init (setq custom-file
+              (no-littering-expand-etc-file-name
+               "custom.el")))
+
+(use-package gcmh
+  :config (gcmh-mode 1))
+
+(use-package naysayer-theme
+  :straight (naysayer-theme
+             :type git
+             :host github
+             :repo "nickav/naysayer-theme.el")
+  :config (load-theme 'naysayer t))
+
+(use-package multiple-cursors
+  :init (setq mc/always-run-for-all t)
+  :bind (("C-." . mc/mark-next-like-this)
+         ("C-," . mc/skip-to-next-like-this)))
+
+(use-package avy
+  :bind (("C-;" . avy-goto-word-1)
+         ("C-'" . 'avy-goto-char-timer)))
+
+(use-package treesit-auto
+  :init (setq treesit-auto-install 'prompt)
+  :config (global-treesit-auto-mode 1))
+
+(use-package expreg
+  :bind (("C-=" . expreg-expand)))

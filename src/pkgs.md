@@ -10,6 +10,7 @@ xdg-desktop-portal-wlr polkitd-pkla wireplumber rtkit
 intel-media-va-driver
 
 ## Programming
-build-essential git indent gdb automake
+build-essential git indent automake
 emacs-pgtk fonts-noto-color-emoji
+valgrind cppcheck gdb
 libsdl2-dev

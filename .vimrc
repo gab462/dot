@@ -21,6 +21,8 @@ autocmd Colorscheme quiet hi Normal ctermbg=NONE
 			\ | hi PreProc ctermfg=darkred
 colorscheme quiet
 
+set et sts=2 sw=2
+
 set wildmenu
 set wildignore=*.o
 set path=**

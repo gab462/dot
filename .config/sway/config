@@ -4,17 +4,15 @@ set $down j
 set $up k
 set $right l
 set $term foot
-set $menu bemenu-run --fn "Terminus (TTF) 20" --line-height 35 | xargs swaymsg exec --
+set $menu bemenu-run --fn "Terminus (TTF) 18" --line-height 31 | xargs swaymsg exec --
 
 include /etc/sway/config-vars.d/*
 
 xwayland disable
 
-font "Terminus (TTF) 20"
+font "Terminus (TTF) 18"
 
-#output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#output * bg /usr/share/desktop-base/emerald-theme/wallpaper/contents/images/1920x1080.svg fill
-output * bg #777777 solid_color
+output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
 exec swayidle -w \
          timeout 300 'swaylock -f' \
@@ -120,19 +118,9 @@ bar {
     position top
 
     status_command /home/me/.config/sway/bar.sh
-
-    colors {
-      background #ebffff
-      statusline #000000
-      focused_workspace #868ac7 #868ac7 #000000
-      inactive_workspace #ebffff #ebffff #000000
-    }
 }
 
 default_border pixel 5
 gaps inner 10
-
-client.unfocused #9feef2 #f1f1f1 #000000 #9feef2 #9feef2
-client.focused #53adab #f1f1f1 #000000 #53adab #53adab
 
 include /etc/sway/config.d/*

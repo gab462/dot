@@ -15,3 +15,9 @@ emacs-pgtk fonts-noto-color-emoji fonts-terminus
 valgrind cppcheck gdb
 libsdl2-dev wayland-protocols
 musl-dev musl-tools
+
+## Source
+git://repo.or.cz/tinycc.git
+git://git.suckless.org/sbase
+https://github.com/aligrudi/neatvi.git
+https://github.com/lua/lua.git

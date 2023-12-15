@@ -5,6 +5,7 @@ fi
 unset HISTFILE
 
 alias nvim="flatpak run io.neovim.nvim"
+alias emacs="emacs --init-directory $HOME/Projects/emacs"
 
 function pwget() {
 	flatpak run --command=bw com.bitwarden.desktop \

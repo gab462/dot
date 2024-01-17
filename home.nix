@@ -44,6 +44,8 @@
 
       input = {
         force_no_accel = true;
+        follow_mouse = 1;
+        mouse_refocus = false;
         kb_options = ctrl:nocaps;
       };
 

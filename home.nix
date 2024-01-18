@@ -97,6 +97,9 @@
         modules-left = [ "hyprland/workspaces" ];
         modules-center = [ "hyprland/window" ];
         modules-right = [ "wireplumber" "memory" "cpu" "temperature" "clock" ];
+        margin-left = 10;
+        margin-right = 10;
+        margin-top = 10;
 
         cpu = {
           format = "{usage}% ";
@@ -120,21 +123,17 @@
       };
     };
     style = ''
-      * {
-        border: none;
-        border-radius: 0;
-        font-size: 18pt;
-      }
-
-      #workspaces button, window#waybar {
-        padding: 0 5px;
-        background: #1d1f21;
+      #waybar {
+        background: rgba(0, 0, 0, 0.5);
         color: white;
+        font-size: 18pt;
+        border-radius: 30px;
       }
 
       #workspaces button.active {
-          background: #333333;
-          border-bottom: 2px solid #327bd1;
+        color: white;
+        background: #333333;
+        border-radius: 30px;
       }
 
       #wireplumber, #memory, #cpu, #temperature, #clock { padding-right: 10px }

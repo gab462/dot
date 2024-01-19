@@ -23,6 +23,7 @@
     pkgs.imv
     pkgs.font-awesome
     pkgs.lutris
+    (pkgs.nerdfonts.override { fonts = [ "iA-Writer" ]; })
   ];
 
   programs.bash = {
@@ -101,18 +102,15 @@
         margin-right = 10;
         margin-top = 10;
 
-        cpu = {
-          format = "{usage}% ";
-        };
+        cpu.format = "{usage}% ";
 
-        memory = {
-          format = "{}% ";
-        };
+        memory.format = "{}% ";
 
         temperature = {
+          thermal-zone = 1;
           critical-threshold = 80;
           format = "{temperatureC}°C {icon}";
-          format-icons = ["" "" ""];
+          format-icons = ["" "" ""];
         };
 
         wireplumber = {
@@ -122,6 +120,7 @@
         };
       };
     };
+
     style = ''
       #waybar {
         background: rgba(0, 0, 0, 0.5);
@@ -159,13 +158,9 @@
     enable = true;
 
     settings = {
-      main = {
-        font = "Monospace:size=18";
-      };
+      main.font = "Monospace:size=18";
 
-      colors = {
-        alpha = 0.9;
-      };
+      colors.alpha = 0.9;
     };
   };
 

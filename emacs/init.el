@@ -25,8 +25,8 @@
       shr-width 70)
 
 (setq-default tab-always-indent 'complete
-              indent-tabs-mode t
-              c-default-style "linux")
+              indent-tabs-mode nil
+              c-default-style "k&r")
 
 (put 'dired-find-alternate-file 'disabled nil)
 

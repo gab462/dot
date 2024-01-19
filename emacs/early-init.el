@@ -2,7 +2,7 @@
 (scroll-bar-mode -1)
 (menu-bar-mode -1)
 
-(add-to-list 'default-frame-alist '(font . "iMWritingQuat Nerd Font-18"))
+(add-to-list 'default-frame-alist '(font . "iA Writer Quattro S-18"))
 (add-to-list 'default-frame-alist '(alpha-background . 90))
 (add-to-list 'default-frame-alist '(reverse . t))
 (set-face-attribute 'mode-line nil :box nil)

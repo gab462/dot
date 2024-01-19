@@ -171,4 +171,9 @@
       pkgs.obs-studio-plugins.obs-vkcapture
     ];
   };
+
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacs29-pgtk;
+  };
 }

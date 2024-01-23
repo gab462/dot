@@ -23,10 +23,12 @@
     pkgs.imv
     pkgs.font-awesome
     pkgs.lutris
+    pkgs.gcc
   ];
 
   programs.bash = {
     enable = true;
+
     profileExtra = ''
       Hyprland
     '';
@@ -52,8 +54,7 @@
       "$mod" = "SUPER";
 
       bind = [
-        "$mod, RETURN, exec, emacs -f eshell"
-	"$mod, E, exec, emacs"
+	      "$mod, RETURN, exec, emacs"
         "$mod, D, exec, bemenu-run --fn \"Monospace 18\" -H 31"
         "$mod, Q, killactive"
         "$mod, H, movefocus, l"

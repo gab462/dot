@@ -26,10 +26,9 @@
 
 (setq-default tab-always-indent 'complete
               indent-tabs-mode nil
-              c-default-style "k&r")
+              c-default-style "gnu")
 
 (put 'dired-find-alternate-file 'disabled nil)
-
 (add-hook 'dired-mode-hook 'dired-hide-details-mode)
 
 (require 'ansi-color)

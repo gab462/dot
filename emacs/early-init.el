@@ -4,8 +4,9 @@
 
 (setq default-frame-alist '((font . "iA Writer Quattro S-18")
                             (alpha-background . 90)
-                            (reverse . t)
-                            (set-face-attribute 'mode-line nil :box nil)))
+                            (reverse . t)))
+
+(set-face-attribute 'mode-line nil :box nil)
 
 (setq package-enable-at-startup nil)
 

@@ -173,7 +173,6 @@
     ];
   };
 
-
   programs.emacs = {
     enable = true;
     package = pkgs.emacs29-pgtk;
@@ -187,11 +186,7 @@
 
     extraConfig = let
       attrString = with builtins; fn: attrs: concatStringsSep " " (attrValues (mapAttrs fn attrs));
-      emacsSettings = {
-        setq, setq-default,
-          global-modes, bind,
-          font, alpha, theme
-      }: ''
+      emacsSettings = { setq, setq-default, global-modes, bind, font, alpha, theme }: ''
         (setq ${attrString (name: value: "${name} ${value}") setq})
         (setq-default ${attrString (name: value: "${name} ${value}") setq-default})
         ${attrString (name: value: "(${name}-mode ${value})") global-modes}
@@ -200,6 +195,7 @@
         (set-frame-parameter nil 'font "${font}")
         (load-theme '${theme} t)
         (set-face-attribute 'mode-line nil :box nil)
+        (put 'dired-find-alternate-file 'disabled nil)
       '';
     in emacsSettings {
       font = "Roboto Mono Medium-18";

@@ -3,25 +3,19 @@
 {
   home.username = "me";
   home.homeDirectory = "/home/me";
-
   home.stateVersion = "23.11";
 
   nixpkgs.config.allowUnfree = true;
 
   fonts.fontconfig.enable = true;
 
-  home.packages = [
-    pkgs.bemenu
-    pkgs.grimblast
-    pkgs.wl-clipboard
-    pkgs.font-awesome
-    pkgs.git
-    pkgs.gh
-    pkgs.mpv
-    pkgs.imv
-    pkgs.gcc
-    pkgs.lutris
-    pkgs.osu-lazer-bin
+  home.packages = with pkgs; [
+    bemenu grimblast wl-clipboard
+    font-awesome roboto-mono
+    git gh
+    mpv imv
+    lutris osu-lazer-bin
+    gcc
   ];
 
   programs.bash = {
@@ -57,8 +51,8 @@
       "$mod" = "SUPER";
 
       bind = [
-	      "$mod, RETURN, exec, foot"
-	      "$mod, E, exec, emacs"
+        "$mod, RETURN, exec, foot"
+        "$mod, E, exec, emacs"
         "$mod, D, exec, bemenu-run --fn \"Monospace 18\" -H 31"
         "$mod, Q, killactive"
         "$mod, SPACE, layoutmsg, swapwithmaster master"
@@ -81,13 +75,18 @@
               c = (x + 1) / 10;
             in
               builtins.toString (x + 1 - (c * 10));
-            in [
-              "$mod, ${ws}, workspace, ${toString (x + 1)}"
-              "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-            ]
+          in [
+            "$mod, ${ws}, workspace, ${toString (x + 1)}"
+            "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+          ]
         )
-        10)
+          10)
       );
+
+      bindm = [
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
+      ];
     };
   };
 
@@ -127,7 +126,7 @@
       #waybar {
         background: rgba(0, 0, 0, 0.5);
         color: white;
-        font-family: iA Writer Quattro S;
+        font-family: Roboto Mono Medium;
         font-size: 18pt;
         border-radius: 30px;
       }
@@ -146,8 +145,6 @@
     enable = true;
 
     settings = {
-      expandtab = true;
-      shiftwidth = 2;
       copyindent = true;
       background = "dark";
     };
@@ -161,7 +158,7 @@
     enable = true;
 
     settings = {
-      main.font = "Monospace:size=18";
+      main.font = "Roboto Mono Medium:size=18";
 
       colors.alpha = 0.9;
     };
@@ -170,10 +167,12 @@
   programs.obs-studio = {
     enable = true;
 
-    plugins = [
-      pkgs.obs-studio-plugins.obs-vkcapture
+    plugins = with pkgs.obs-studio-plugins; [
+      obs-vkcapture
+      obs-pipewire-audio-capture
     ];
   };
+
 
   programs.emacs = {
     enable = true;

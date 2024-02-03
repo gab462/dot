@@ -178,5 +178,80 @@
   programs.emacs = {
     enable = true;
     package = pkgs.emacs29-pgtk;
+
+    extraPackages = epkgs: with epkgs; [
+      gcmh magit
+      multiple-cursors avy
+      gruvbox-theme
+      nix-mode
+    ];
+
+    extraConfig = let
+      comp2 = f: g: x: f (g x);
+      id = x: x;
+      compose = builtins.foldl' comp2 id;
+      attrString = with builtins; fn: compose [
+        (concatStringsSep " ")
+        attrValues
+        (mapAttrs fn)
+      ];
+      emacsSettings = {
+        setq, setq-default,
+          global-modes, bind,
+          font, alpha, theme
+      }: ''
+        (setq ${attrString (name: value: "${name} ${value}") setq})
+        (setq-default ${attrString (name: value: "${name} ${value}") setq-default})
+        ${attrString (name: value: "(${name}-mode ${value})") global-modes}
+        ${attrString (name: value: "(global-set-key (kbd \"${value}\") '${name})") bind}
+        (set-frame-parameter nil 'alpha-background ${alpha})
+        (set-frame-parameter nil 'font "${font}")
+        (load-theme '${theme} t)
+        (set-face-attribute 'mode-line nil :box nil)
+      '';
+    in emacsSettings {
+      font = "Roboto Mono Medium-18";
+      alpha = "90";
+      theme = "gruvbox";
+
+      setq = {
+        make-backup-files = "nil";
+        create-lockfiles = "nil";
+
+        kill-whole-line = "t";
+        show-paren-delay = "0";
+        ring-bell-function = "'ignore";
+
+        "mc/always-run-for-all" = "t";
+      };
+
+      setq-default = {
+        tab-always-indent = "'complete";
+        indent-tabs-mode = "nil";
+      };
+
+      global-modes = {
+        electric-pair = "t";
+        delete-selection = "t";
+        show-paren = "t";
+        gcmh = "t";
+        tool-bar = "-1";
+        scroll-bar = "-1";
+        menu-bar = "-1";
+      };
+
+      bind = {
+        hippie-expand = "M-/";
+        kill-this-buffer = "C-x k";
+        raise-sexp = "M-*";
+        mark-sexp = "C-=";
+
+        avy-goto-word-1 = "C-;";
+        avy-goto-char-timer = "C-'";
+
+        "mc/mark-next-like-this" = "C-.";
+        "mc/skip-to-next-like-this" = "C-,";
+      };
+    };
   };
 }

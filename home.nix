@@ -93,6 +93,7 @@
   programs.waybar = {
     enable = true;
     systemd.enable = true;
+
     settings = {
       mainBar = {
         layer = "top";
@@ -159,7 +160,6 @@
 
     settings = {
       main.font = "Roboto Mono Medium:size=18";
-
       colors.alpha = 0.9;
     };
   };
@@ -196,6 +196,7 @@
         (load-theme '${theme} t)
         (set-face-attribute 'mode-line nil :box nil)
         (put 'dired-find-alternate-file 'disabled nil)
+        (defalias 'yes-or-no-p 'y-or-n-p)
       '';
     in emacsSettings {
       font = "Roboto Mono Medium-18";

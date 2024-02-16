@@ -26,8 +26,8 @@ vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
 vim.api.nvim_set_hl(0, "WinBar", { bg = "NONE" })
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "*",
-	callback = function() vim.treesitter.start() end
+    pattern = "*",
+    callback = function() vim.treesitter.start() end
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd("FileType", {
         })
         vim.lsp.buf_attach_client(0, client)
 
-	vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, { noremap = true })
-	vim.keymap.set("i", "<tab>", function() return vim.fn.pumvisible() == 1 and "<C-n>" or "<C-x><C-o>" end, { noremap = true, expr = true })
+        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, { noremap = true })
+        vim.keymap.set("i", "<tab>", function() return vim.fn.pumvisible() == 1 and "<C-n>" or "<C-x><C-o>" end, { noremap = true, expr = true })
     end
 })

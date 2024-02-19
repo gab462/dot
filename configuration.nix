@@ -47,11 +47,6 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [
-    vim
-    foot
-  ];
-
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;

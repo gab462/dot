@@ -14,9 +14,10 @@
 
 (set-frame-parameter nil 'alpha-background 90)
 (set-frame-parameter nil 'font "Roboto Mono Medium-18")
-
 (set-face-attribute 'mode-line nil :box nil)
+
 (put 'dired-find-alternate-file 'disabled nil)
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (dolist (binding '((hippie-expand . "M-/")

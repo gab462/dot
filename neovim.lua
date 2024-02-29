@@ -15,7 +15,7 @@ vim.opt.swapfile = false
 vim.opt.mouse = ""
 
 vim.opt.completeopt = "menuone,longest" -- ,popup (0.10)
-vim.opt.wildignore = "*.o,*.wasm,*/"
+vim.opt.wildignore = "_*/**,*/"
 vim.keymap.set("n", "<C-p>", ":e **/*");
 
 vim.opt.background = "dark"
@@ -31,11 +31,11 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "cpp",
+    pattern = "ocaml",
     callback = function()
         local client = vim.lsp.start({
-            name = "Clang",
-            cmd = { "clangd" },
+            name = "OCaml LSP",
+            cmd = { "ocamllsp" },
             root_dir = ".",
         })
         vim.lsp.buf_attach_client(0, client)

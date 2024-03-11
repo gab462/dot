@@ -2,32 +2,24 @@
 { config, pkgs, ... }:
 
 {
-  home.username = "me";
-  home.homeDirectory = "/home/me";
-  home.stateVersion = "23.11";
+  home = {
+    stateVersion = "23.11";
+    username = "me";
+    homeDirectory = "/home/me";
+
+    packages = with pkgs; [
+      bemenu grimblast wl-clipboard
+      font-awesome roboto-mono
+      git gh
+      mpv imv
+      lutris osu-lazer-bin
+      gawk jq hexdump # pipewire-screenaudio
+    ];
+  };
 
   nixpkgs.config.allowUnfree = true;
 
   fonts.fontconfig.enable = true;
-
-  home.packages = with pkgs; [
-    bemenu grimblast wl-clipboard
-    font-awesome roboto-mono
-    git gh
-    mpv imv
-    lutris osu-lazer-bin
-    gawk jq hexdump # pipewire-screenaudio
-  ];
-
-  programs.bash = {
-    enable = true;
-
-    profileExtra = ''
-      [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ] && Hyprland
-    '';
-  };
-
-  programs.home-manager.enable = true;
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -92,119 +84,132 @@
     };
   };
 
-  programs.waybar = {
-    enable = true;
-    systemd.enable = true;
+  programs = {
+    home-manager.enable = true;
 
-    settings = {
-      mainBar = {
-        layer = "top";
-        modules-left = [ "hyprland/workspaces" ];
-        modules-center = [ "hyprland/window" ];
-        modules-right = [ "wireplumber" "memory" "cpu" "temperature" "clock" ];
-        margin-left = 10;
-        margin-right = 10;
-        margin-top = 10;
+    bash = {
+      enable = true;
 
-        cpu.format = "{usage}% ";
+      profileExtra = ''
+        [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ] && Hyprland
+        '';
+    };
 
-        memory.format = "{}% ";
+    waybar = {
+      enable = true;
+      systemd.enable = true;
 
-        temperature = {
-          thermal-zone = 1;
-          critical-threshold = 80;
-          format = "{temperatureC}°C {icon}";
-          format-icons = ["" "" ""];
+      settings = {
+        mainBar = {
+          layer = "top";
+          modules-left = [ "hyprland/workspaces" ];
+          modules-center = [ "hyprland/window" ];
+          modules-right = [ "wireplumber" "memory" "cpu" "temperature" "clock" ];
+          margin-left = 10;
+          margin-right = 10;
+          margin-top = 10;
+
+          cpu.format = "{usage}% ";
+
+          memory.format = "{}% ";
+
+          temperature = {
+            thermal-zone = 1;
+            critical-threshold = 80;
+            format = "{temperatureC}°C {icon}";
+            format-icons = ["" "" ""];
+          };
+
+          wireplumber = {
+            format = "{volume}% {icon}";
+            format-muted = "";
+            format-icons = ["" "" ""];
+          };
         };
+      };
 
-        wireplumber = {
-          format = "{volume}% {icon}";
-          format-muted = "";
-          format-icons = ["" "" ""];
+      style = ''
+        #waybar {
+          background: rgba(0, 0, 0, 0.5);
+          color: white;
+          font-family: Roboto Mono Medium;
+          font-size: 18pt;
+          border-radius: 30px;
+        }
+
+        #workspaces button.active {
+          color: white;
+          background: #333333;
+          border-radius: 30px;
+        }
+
+        #wireplumber, #memory, #cpu, #temperature, #clock { padding-right: 10px }
+      '';
+    };
+
+    foot = {
+      enable = true;
+
+      settings = {
+        main.font = "Roboto Mono Medium:size=18";
+
+        colors = {
+          alpha = 0.9;
+          background = "282828";
+          foreground = "ebdbb2";
+          regular0 = "282828";
+          regular1 = "cc241d";
+          regular2 = "98971a";
+          regular3 = "d79921";
+          regular4 = "458588";
+          regular5 = "b16286";
+          regular6 = "689d6a";
+          regular7 = "a89984";
+          bright0 = "928374";
+          bright1 = "fb4934";
+          bright2 = "b8bb26";
+          bright3 = "fabd2f";
+          bright4 = "83a598";
+          bright5 = "d3869b";
+          bright6 = "8ec07c";
+          bright7 = "ebdbb2";
         };
       };
     };
 
-    style = ''
-      #waybar {
-        background: rgba(0, 0, 0, 0.5);
-        color: white;
-        font-family: Roboto Mono Medium;
-        font-size: 18pt;
-        border-radius: 30px;
-      }
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
+      extraLuaConfig = builtins.readFile ./neovim.lua;
 
-      #workspaces button.active {
-        color: white;
-        background: #333333;
-        border-radius: 30px;
-      }
-
-      #wireplumber, #memory, #cpu, #temperature, #clock { padding-right: 10px }
-    '';
-  };
-
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
-    extraLuaConfig = builtins.readFile ./neovim.lua;
-
-    plugins = with pkgs.vimPlugins; [
-      gruvbox-nvim nvim-treesitter.withAllGrammars
-    ];
-  };
-
-  programs.foot = {
-    enable = true;
-
-    settings = {
-      main.font = "Roboto Mono Medium:size=18";
-      colors = {
-        alpha = 0.9;
-        background = "282828";
-        foreground = "ebdbb2";
-        regular0 = "282828";
-        regular1 = "cc241d";
-        regular2 = "98971a";
-        regular3 = "d79921";
-        regular4 = "458588";
-        regular5 = "b16286";
-        regular6 = "689d6a";
-        regular7 = "a89984";
-        bright0 = "928374";
-        bright1 = "fb4934";
-        bright2 = "b8bb26";
-        bright3 = "fabd2f";
-        bright4 = "83a598";
-        bright5 = "d3869b";
-        bright6 = "8ec07c";
-        bright7 = "ebdbb2";
-      };
+      plugins = with pkgs.vimPlugins; [
+        gruvbox-nvim nvim-treesitter.withAllGrammars
+      ];
     };
-  };
 
-  programs.obs-studio = {
-    enable = true;
+    emacs = {
+      enable = true;
+      package = pkgs.emacs29-pgtk;
+      extraConfig = builtins.readFile ./emacs.el;
 
-    plugins = with pkgs.obs-studio-plugins; [
-      obs-vkcapture
-      obs-pipewire-audio-capture
-    ];
-  };
+      extraPackages = epkgs: with epkgs; [
+        gcmh magit
+          multiple-cursors avy
+          gruvbox-theme
+          nix-mode
+      ];
+    };
 
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacs29-pgtk;
-    extraConfig = builtins.readFile ./emacs.el;
+    obs-studio = {
+      enable = true;
 
-    extraPackages = epkgs: with epkgs; [
-      gcmh magit
-      multiple-cursors avy
-      gruvbox-theme
-      nix-mode
-    ];
+      plugins = with pkgs.obs-studio-plugins; [
+        obs-vkcapture
+          obs-pipewire-audio-capture
+      ];
+    };
   };
 }

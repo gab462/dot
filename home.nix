@@ -140,18 +140,20 @@
       };
 
       style = ''
-        #waybar {
+        window { background: transparent; }
+
+        window box > box {
           background: rgba(0, 0, 0, 0.5);
           color: white;
           font-family: Roboto Mono Medium;
           font-size: 18pt;
           border-radius: 30px;
+          padding-right: 10px;
+          padding-left: 10px;
         }
 
         #workspaces button.active {
           color: white;
-          background: #333333;
-          border-radius: 30px;
         }
 
         #wireplumber, #memory, #cpu, #temperature, #clock { padding-right: 10px }
@@ -208,9 +210,9 @@
 
       extraPackages = epkgs: with epkgs; [
         gcmh magit
-          multiple-cursors avy
-          gruvbox-theme
-          nix-mode
+        multiple-cursors avy
+        gruvbox-theme
+        nix-mode
       ];
     };
 
@@ -218,8 +220,7 @@
       enable = true;
 
       plugins = with pkgs.obs-studio-plugins; [
-        obs-vkcapture
-          obs-pipewire-audio-capture
+        obs-vkcapture obs-pipewire-audio-capture
       ];
     };
   };

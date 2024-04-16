@@ -38,7 +38,13 @@
                    ((lambda ()
                       (interactive)
                       (find-file user-emacs-directory))
-                    . "C-c i")))
+                    . "C-c i")
+
+                   ((lambda ()
+                      (interactive)
+                      (let ((exec-path (cons "~/.local/bin" exec-path)))
+                        (run-lisp "qlenv repl")))
+                    . "C-c r")))
   (global-set-key (kbd (cdr binding)) (car binding)))
 
 (electric-pair-mode t)

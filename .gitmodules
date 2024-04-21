@@ -28,3 +28,9 @@
 [submodule ".config/emacs/lisp/compat"]
 	path = .config/emacs/lisp/compat
 	url = https://github.com/emacs-compat/compat.git
+[submodule ".config/emacs/lisp/inf-clojure"]
+	path = .config/emacs/lisp/inf-clojure
+	url = https://github.com/clojure-emacs/inf-clojure.git
+[submodule ".config/emacs/lisp/clojure-mode"]
+	path = .config/emacs/lisp/clojure-mode
+	url = https://github.com/clojure-emacs/clojure-mode

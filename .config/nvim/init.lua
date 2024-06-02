@@ -9,20 +9,27 @@ vim.opt.incsearch = true
 vim.opt.guicursor = ""
 vim.opt.laststatus = 3
 vim.opt.winbar = "%=%f %m"
-vim.opt.termguicolors = false
 
 vim.opt.backup = false
 vim.opt.swapfile = false
 vim.opt.mouse = ""
 
-vim.keymap.set("n", "<C-p>", ":e **/*");
+vim.opt.termguicolors = true
+vim.opt.bg = "dark"
 
-vim.api.nvim_create_autocmd("Colorscheme", { callback = function()
-    vim.api.nvim_set_hl(0, "Normal", { ctermbg = "none" })
+vim.g.c_syntax_for_h = true
 
-    for k, v in pairs({ Comment = "darkgreen", Constant = "darkblue", PreProc = "darkred" }) do
-        vim.api.nvim_set_hl(0, k, { ctermfg = v })
+vim.api.nvim_create_autocmd("Filetype", {
+    pattern = "c",
+    callback = function()
+        vim.treesitter.start()
+
+        local client = vim.lsp.start({
+            name = "Clang",
+            cmd = { "clangd" },
+            root_dir = "."
+        })
+
+        vim.lsp.buf_attach_client(0, client)
     end
-end})
-
-vim.cmd.colorscheme("quiet")
+})

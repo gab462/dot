@@ -17,20 +17,3 @@ vim.opt.mouse = ""
 
 vim.opt.termguicolors = true
 vim.opt.bg = "dark"
-
-vim.g.c_syntax_for_h = true
-
-vim.api.nvim_create_autocmd("Filetype", {
-    pattern = "c",
-    callback = function()
-        vim.treesitter.start()
-
-        local client = vim.lsp.start({
-            name = "Clang",
-            cmd = { "clangd" },
-            root_dir = "."
-        })
-
-        vim.lsp.buf_attach_client(0, client)
-    end
-})

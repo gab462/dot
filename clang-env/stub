@@ -1,5 +1,0 @@
-#!/bin/sh
-
-DIR=$(dirname "$0")
-
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DIR/ncurses-compat-libs-6.4-12.20240127.fc40.x86_64/usr/lib64 $DIR/clang+llvm-18.1.8-x86_64-linux-gnu-ubuntu-18.04/bin/clang $@

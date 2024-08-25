@@ -10,21 +10,3 @@
 [submodule ".local/share/nvim/site/pack/plugins/start/vim-surround"]
 	path = .local/share/nvim/site/pack/plugins/start/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule ".config/emacs/lisp/avy"]
-	path = .config/emacs/lisp/avy
-	url = https://github.com/abo-abo/avy
-[submodule ".config/emacs/lisp/multiple-cursors.el"]
-	path = .config/emacs/lisp/multiple-cursors.el
-	url = https://github.com/magnars/multiple-cursors.el.git
-[submodule ".config/emacs/gcmh"]
-	path = .config/emacs/lisp/gcmh
-	url = https://github.com/emacsmirror/gcmh.git
-[submodule ".config/emacs/paredit"]
-	path = .config/emacs/lisp/paredit
-	url = https://github.com/emacsmirror/paredit.git
-[submodule ".config/emacs/lisp/no-littering"]
-	path = .config/emacs/lisp/no-littering
-	url = https://github.com/emacscollective/no-littering.git
-[submodule ".config/emacs/lisp/compat"]
-	path = .config/emacs/lisp/compat
-	url = https://github.com/emacs-compat/compat.git

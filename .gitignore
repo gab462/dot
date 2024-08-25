@@ -1,6 +1,5 @@
-.config/emacs/var
-.config/emacs/etc
-flatpak-emacs-first-run
-flatpak-emacs-sdk-update-23.08
+.config/emacs/elpa
+.config/emacs/auto-save-list/
+.config/emacs/custom.el
+.config/emacs/eshell/
 npmrc
-user-dirs.dirs

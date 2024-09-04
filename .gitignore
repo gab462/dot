@@ -3,3 +3,5 @@
 .config/emacs/custom.el
 .config/emacs/eshell/
 npmrc
+tcc-env/musl
+tcc-env/tinycc

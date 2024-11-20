@@ -282,7 +282,7 @@
 
 ** XDG Base Directory
 
-   Configuration needed for cleaning up the home folder
+*** npm
 
    #+begin_src conf :tangle ~/.config/npm/npmrc
      prefix=${XDG_DATA_HOME}/npm

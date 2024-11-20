@@ -15,7 +15,7 @@
     git gh
     mpv imv
     lutris osu-lazer-bin
-    gcc
+    gawk jq hexdump # pipewire-screenaudio
   ];
 
   programs.bash = {
@@ -142,16 +142,13 @@
     '';
   };
 
-  programs.vim = {
+  programs.neovim = {
     enable = true;
+    defaultEditor = true;
+    extraLuaConfig = builtins.readFile ./neovim.lua;
 
-    settings = {
-      copyindent = true;
-      background = "dark";
-    };
-
-    plugins = [
-      pkgs.vimPlugins.vim-fugitive
+    plugins = with pkgs.vimPlugins; [
+      gruvbox-nvim nvim-treesitter.withAllGrammars
     ];
   };
 
@@ -160,7 +157,27 @@
 
     settings = {
       main.font = "Roboto Mono Medium:size=18";
-      colors.alpha = 0.9;
+      colors = {
+        alpha = 0.9;
+        background = "282828";
+        foreground = "ebdbb2";
+        regular0 = "282828";
+        regular1 = "cc241d";
+        regular2 = "98971a";
+        regular3 = "d79921";
+        regular4 = "458588";
+        regular5 = "b16286";
+        regular6 = "689d6a";
+        regular7 = "a89984";
+        bright0 = "928374";
+        bright1 = "fb4934";
+        bright2 = "b8bb26";
+        bright3 = "fabd2f";
+        bright4 = "83a598";
+        bright5 = "d3869b";
+        bright6 = "8ec07c";
+        bright7 = "ebdbb2";
+      };
     };
   };
 
@@ -176,6 +193,7 @@
   programs.emacs = {
     enable = true;
     package = pkgs.emacs29-pgtk;
+    extraConfig = builtins.readFile ./emacs.el;
 
     extraPackages = epkgs: with epkgs; [
       gcmh magit
@@ -183,64 +201,5 @@
       gruvbox-theme
       nix-mode
     ];
-
-    extraConfig = let
-      attrString = with builtins; fn: attrs: concatStringsSep " " (attrValues (mapAttrs fn attrs));
-      emacsSettings = { setq, setq-default, global-modes, bind, font, alpha, theme }: ''
-        (setq ${attrString (name: value: "${name} ${value}") setq})
-        (setq-default ${attrString (name: value: "${name} ${value}") setq-default})
-        ${attrString (name: value: "(${name}-mode ${value})") global-modes}
-        ${attrString (name: value: "(global-set-key (kbd \"${value}\") '${name})") bind}
-        (set-frame-parameter nil 'alpha-background ${alpha})
-        (set-frame-parameter nil 'font "${font}")
-        (load-theme '${theme} t)
-        (set-face-attribute 'mode-line nil :box nil)
-        (put 'dired-find-alternate-file 'disabled nil)
-        (defalias 'yes-or-no-p 'y-or-n-p)
-      '';
-    in emacsSettings {
-      font = "Roboto Mono Medium-18";
-      alpha = "90";
-      theme = "gruvbox";
-
-      setq = {
-        make-backup-files = "nil";
-        create-lockfiles = "nil";
-
-        kill-whole-line = "t";
-        show-paren-delay = "0";
-        ring-bell-function = "'ignore";
-
-        "mc/always-run-for-all" = "t";
-      };
-
-      setq-default = {
-        tab-always-indent = "'complete";
-        indent-tabs-mode = "nil";
-      };
-
-      global-modes = {
-        electric-pair = "t";
-        delete-selection = "t";
-        show-paren = "t";
-        gcmh = "t";
-        tool-bar = "-1";
-        scroll-bar = "-1";
-        menu-bar = "-1";
-      };
-
-      bind = {
-        hippie-expand = "M-/";
-        kill-this-buffer = "C-x k";
-        raise-sexp = "M-*";
-        mark-sexp = "C-=";
-
-        avy-goto-word-1 = "C-;";
-        avy-goto-char-timer = "C-'";
-
-        "mc/mark-next-like-this" = "C-.";
-        "mc/skip-to-next-like-this" = "C-,";
-      };
-    };
   };
 }

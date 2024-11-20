@@ -31,6 +31,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     {
         "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
         config = function()
             require("nvim-treesitter.configs").setup({
                 ensure_installed = "all",
@@ -80,7 +81,7 @@ require("lazy").setup({
     {
         "ggandor/leap.nvim",
         config = function()
-            require('leap').add_default_mappings()
+            require("leap").add_default_mappings()
         end
     }
 },

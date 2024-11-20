@@ -16,9 +16,6 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-(add-to-list 'exec-path "~/.local/bin")
-(setenv "PATH" (format "%s:%s" "~/.local/bin" (getenv "PATH")))
-
 (dolist (binding '((hippie-expand . "M-/")
                    (kill-this-buffer . "C-x k")
                    (raise-sexp . "M-*")
@@ -37,8 +34,12 @@
 (when (equal system-type 'darwin)
   (toggle-frame-maximized))
 
-(require 'use-package-ensure)
-(setq use-package-always-ensure t)
+(use-package use-package-ensure
+  :init (setq use-package-always-ensure t))
+
+(use-package package
+  :config (add-to-list 'package-archives
+                       '("melpa" . "https://melpa.org/packages/") t))
 
 (use-package gcmh
   :config (gcmh-mode t))
@@ -52,5 +53,12 @@
   :bind (("C-." . mc/mark-next-like-this)
          ("C-," . mc/skip-to-next-like-this)))
 
-(use-package inf-clojure
-  :bind ("C-c r" . inf-clojure))
+(use-package corfu
+  :hook (eglot-managed-mode . corfu-mode))
+
+(use-package eldoc-box
+  :hook (eglot-managed-mode . eldoc-box-hover-mode))
+
+(use-package magit)
+
+(use-package rust-mode)

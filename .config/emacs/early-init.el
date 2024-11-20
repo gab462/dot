@@ -1,14 +1,9 @@
 (setq gc-cons-threshold most-positive-fixnum)
 
-;; (when (fboundp 'startup-redirect-eln-cache)
-;;  (startup-redirect-eln-cache
-;;    (convert-standard-filename
-;;      (expand-file-name  "var/eln-cache/" user-emacs-directory))))
-
 (set-face-attribute 'mode-line nil :box nil)
 (set-frame-parameter nil 'alpha-background 90)
 
-(add-to-list 'default-frame-alist '(font . "MesloLGL Nerd Font-18"))
+(add-to-list 'default-frame-alist '(font . "MesloLGM Nerd Font-18"))
 (add-to-list 'default-frame-alist '(reverse . t))
 
 (tool-bar-mode -1)

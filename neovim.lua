@@ -1,4 +1,7 @@
 vim.opt.smartindent = true
+vim.opt.expandtab = true
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
 
 vim.opt.number = true
 vim.opt.hlsearch = false
@@ -13,7 +16,9 @@ vim.opt.mouse = ""
 vim.opt.laststatus = 3
 vim.opt.winbar = "%=%f %m"
 
-vim.o.background = "dark"
+vim.opt.completeopt = "menuone,longest" -- ,popup (0.10)
+
+vim.opt.background = "dark"
 
 vim.cmd.colorscheme("gruvbox")
 

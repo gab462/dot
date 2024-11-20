@@ -375,3 +375,32 @@ Create an isolated quicklisp environment.
   set autoindent
   set incsearch ignorecase smartcase
 #+end_src
+
+** Qutebrowser
+
+#+begin_src python :tangle ~/.config/qutebrowser/config.py
+  config.load_autoconfig(False)
+
+  c.content.private_browsing = True
+
+  c.downloads.location.directory = '/home/HDD/Downloads'
+
+  c.statusbar.show = 'in-mode'
+
+  c.statusbar.padding = {'top': 6, 'right': 8, 'bottom': 6, 'left': 8}
+
+  c.tabs.favicons.scale = 1
+
+  c.tabs.padding = {'top': 6, 'right': 8, 'bottom': 6, 'left': 8}
+
+  c.tabs.show = 'multiple'
+
+  c.tabs.indicator.width = 1
+
+  c.colors.webpage.darkmode.enabled = True
+
+  c.url.start_pages = 'https://start.duckduckgo.com/'
+
+  c.colors.downloads.system.bg = 'none'
+  c.colors.tabs.indicator.system = 'none'
+#+end_src

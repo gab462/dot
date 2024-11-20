@@ -28,9 +28,6 @@
               indent-tabs-mode nil
               c-default-style "gnu")
 
-(setq straight-use-package-by-default t)
-;; (setq use-package-always-ensure t)
-
 (put 'dired-find-alternate-file 'disabled nil)
 
 (require 'ansi-color)
@@ -60,19 +57,12 @@
 
 ;; Packages
 
-;; Install straight.el
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 6))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
 
 (use-package no-littering
   :config (setq custom-file
@@ -87,13 +77,6 @@
   :config (global-treesit-auto-mode 1))
 
 (use-package magit)
-
-(use-package naysayer-theme
-  :straight (naysayer-theme
-             :type git
-             :host github
-             :repo "nickav/naysayer-theme.el")
-  :config (load-theme 'naysayer t))
 
 (use-package multiple-cursors
   :init (setq mc/always-run-for-all t)

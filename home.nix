@@ -57,7 +57,7 @@
 
       bind = [
         "$mod, RETURN, exec, foot"
-        "$mod, D, exec, bemenu-run --fn \"Monospace 18\""
+        "$mod, D, exec, bemenu-run --fn \"Monospace 18\" -H 31"
         "$mod, Q, killactive"
         "$mod, H, movefocus, l"
         "$mod, J, movefocus, d"
@@ -126,15 +126,10 @@
         font-size: 18pt;
       }
 
-      window#waybar {
-          background: #1d1f21;
-          color: white;
-      }
-
-      #workspaces button {
-          padding: 0 5px;
-          background: #1d1f21;
-          color: white;
+      #workspaces button, window#waybar {
+        padding: 0 5px;
+        background: #1d1f21;
+        color: white;
       }
 
       #workspaces button.active {

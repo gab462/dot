@@ -1,0 +1,11 @@
+#!/bin/sh
+
+APPID=$(find ~/.local/share/Steam/steamapps/ -maxdepth 1 -type f -name '*.acf' \
+    -exec awk -F '"' '/"appid|name/{ printf $4 " " } END { print "" }' {} \; \
+    | grep -iv "steam" \
+    | grep -iv "proton" \
+    | sort -k 2 \
+    | wmenu -f "Monospace 18" -i \
+    | cut -d ' ' -f 1)
+
+steam steam://rungameid/$APPID

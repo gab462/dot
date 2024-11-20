@@ -2,7 +2,14 @@
 (scroll-bar-mode -1)
 (menu-bar-mode -1)
 
-(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-18"))
+(pcase system-type
+  ('gnu/linux
+   (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-18")))
+  ('darwin
+   (setq mac-command-modifier 'meta)
+   (set-face-attribute 'default nil :height 200)
+   ;; (add-to-list 'default-frame-alist '(undecorated . t))
+   (add-to-list 'default-frame-alist '(fullscreen . maximized))))
 
 (setq package-enable-at-startup nil)
 

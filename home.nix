@@ -59,7 +59,8 @@
       "$mod" = "SUPER";
 
       bind = [
-	      "$mod, RETURN, exec, emacs"
+	      "$mod, RETURN, exec, foot"
+	      "$mod, E, exec, emacs"
         "$mod, D, exec, bemenu-run --fn \"Monospace 18\" -H 31"
         "$mod, Q, killactive"
         "$mod, SPACE, layoutmsg, swapwithmaster master"
@@ -141,6 +142,31 @@
 
       #wireplumber, #memory, #cpu, #temperature, #clock { padding-right: 10px }
     '';
+  };
+
+  programs.vim = {
+    enable = true;
+
+    settings = {
+      expandtab = true;
+      shiftwidth = 2;
+      copyindent = true;
+      background = "dark";
+    };
+
+    plugins = [
+      pkgs.vimPlugins.vim-fugitive
+    ];
+  };
+
+  programs.foot = {
+    enable = true;
+
+    settings = {
+      main.font = "Monospace:size=18";
+
+      colors.alpha = 0.9;
+    };
   };
 
   programs.obs-studio = {

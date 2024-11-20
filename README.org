@@ -27,7 +27,7 @@
 
       (setq initial-major-mode 'fundamental-mode)
 
-      (setq package-enable-at-startup nil)
+      ;; (setq package-enable-at-startup nil)
     #+end_src
 
     Lower GC threshold after initialization.
@@ -169,6 +169,48 @@
                     (split-window-below -5)
                     (other-window 1)
                     (run-lisp "qlenv repl")))))
+   #+end_src
+
+** Extra packages
+
+   #+begin_src elisp :tangle ~/.config/emacs/init.el
+     (require 'package)
+
+     (defmacro select-package (package &rest body)
+       `(progn
+          (add-to-list 'package-selected-packages ',package)
+          ,(append `(when (require ',package nil t)) body)))
+
+     (put 'select-package 'lisp-indent-function 'defun)
+
+     (select-package modus-themes
+       (load-theme 'modus-vivendi t)
+       (set-face-attribute 'mode-line nil :box nil))
+
+     (select-package corfu
+       (setq corfu-auto t
+             corfu-quit-no-match t)
+       (corfu-global-mode t))
+
+     (select-package vertico
+       (setq minibuffer-prompt-properties '(read-only t cursor-intangible t face minibuffer-prompt)
+             enable-recursive-minibuffers t)
+       (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+       (vertico-mode t))
+
+     (select-package marginalia
+       (marginalia-mode t))
+
+     (select-package magit)
+
+     (select-package inf-clojure
+       (setq inf-clojure-custom-startup "clojure -M:dev"
+             inf-clojure-custom-repl-type  'clojure)
+       (inf-clojure-update-feature 'clojure 'completion "(compliment.core/completions \"%s\")"))
+
+     ;; (select-package eglot)
+
+     ;; (select-package exwm)
    #+end_src
 
 * Shell

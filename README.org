@@ -118,8 +118,8 @@ Lower GC threshold after initialization.
    "pkg"
    '("(in-package :cl-user)" n
      n
-     "(defsystem " (P "Package name: " package-name) n>
-     "(:use (:cl)))" n>
+     "(defpackage " (P "Package name: " package-name) n>
+     "(:use :cl))" n>
      n
      "(in-package :" (s package-name) ")" n n)
    "pkg")

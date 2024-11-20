@@ -33,6 +33,9 @@
 
 (put 'dired-find-alternate-file 'disabled nil)
 
+(require 'ansi-color)
+(add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
+
 ;; Minor modes
 
 (electric-pair-mode t)

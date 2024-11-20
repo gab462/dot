@@ -4,7 +4,7 @@ set $down j
 set $up k
 set $right l
 set $term foot
-set $menu bemenu-run --fn "Hermit 18" --line-height 30 | xargs swaymsg exec --
+set $menu bemenu-run --fn "DejaVu Sans Mono 18" --line-height 35 | xargs swaymsg exec --
 
 include /etc/sway/config-vars.d/*
 
@@ -14,9 +14,9 @@ xwayland disable
 output * bg /usr/share/desktop-base/emerald-theme/wallpaper/contents/images/1920x1080.svg fill
 
 exec swayidle -w \
-         timeout 300 'swaylock --image /usr/share/desktop-base/emerald-theme/plymouth/Emerald_plymouth.svg --font Hermit -f' \
+         timeout 300 'swaylock -f' \
          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock --image /usr/share/desktop-base/emerald-theme/plymouth/Emerald_plymouth.svg --font Hermit -f'
+         before-sleep 'swaylock -f'
 
 input type:keyboard {
     xkb_options ctrl:nocaps
@@ -111,7 +111,7 @@ bindsym XF86AudioLowerVolume exec amixer sset Master 5%-
 bar {
     position top
 
-    font "Hermit 18"
+    font "DejaVu Sans Mono 18"
 
     status_command /home/me/.config/sway/bar.sh
 }

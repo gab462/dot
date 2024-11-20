@@ -23,7 +23,7 @@
     enable = true;
 
     profileExtra = ''
-      [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ] && Hyprland
+      [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ] && Hyprland
     '';
   };
 

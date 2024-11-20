@@ -38,10 +38,15 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
+
     settings = {
       decoration = {
         rounding = 10;
         drop_shadow = true;
+      };
+
+      general = {
+        layout = "master";
       };
 
       input = {
@@ -57,6 +62,7 @@
 	      "$mod, RETURN, exec, emacs"
         "$mod, D, exec, bemenu-run --fn \"Monospace 18\" -H 31"
         "$mod, Q, killactive"
+        "$mod, SPACE, layoutmsg, swapwithmaster master"
         "$mod, H, movefocus, l"
         "$mod, J, movefocus, d"
         "$mod, K, movefocus, u"

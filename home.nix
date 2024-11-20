@@ -55,6 +55,7 @@
         "$mod, RETURN, exec, foot"
         "$mod, E, exec, emacs"
         "$mod, D, exec, bemenu-run --fn \"Monospace 18\" -H 31"
+        "$mod, S, exec, grimblast copy area"
         "$mod, Q, killactive"
         "$mod, SPACE, layoutmsg, swapwithmaster master"
         "$mod, H, movefocus, l"
@@ -146,6 +147,9 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
     extraLuaConfig = builtins.readFile ./neovim.lua;
 
     plugins = with pkgs.vimPlugins; [

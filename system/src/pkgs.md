@@ -10,5 +10,4 @@ xdg-desktop-portal-wlr polkitd-pkla wireplumber rtkit
 intel-media-va-driver
 
 ## Programming
-build-essential git indent gdb python3
-clang lld
+build-essential git indent gdb

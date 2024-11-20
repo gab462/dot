@@ -89,3 +89,9 @@
 
 (use-package expreg
   :bind (("C-=" . expreg-expand)))
+
+(use-package corfu
+  :config (global-corfu-mode))
+
+(use-package eldoc-box
+  :config (add-hook 'eglot-managed-mode-hook #'eldoc-box-hover-mode t))

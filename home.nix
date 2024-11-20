@@ -14,7 +14,7 @@
     bemenu grimblast wl-clipboard
     font-awesome roboto-mono
     git gh
-    mpv # imv (freeimage)
+    mpv imv
     lutris osu-lazer-bin
     gawk jq hexdump # pipewire-screenaudio
   ];

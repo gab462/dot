@@ -1,5 +1,0 @@
-#!/bin/sh
-
-PATH=$HOME/bin:$HOME/opt/sbase/bin
-
-/usr/bin/foot /usr/bin/dash

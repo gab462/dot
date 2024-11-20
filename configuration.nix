@@ -30,9 +30,9 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "us";
-    xkbVariant = "";
+    variant = "";
   };
 
   users.users.me = {

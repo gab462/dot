@@ -88,7 +88,7 @@
         layer = "top";
         modules-left = [ "hyprland/workspaces" ];
         modules-center = [ "hyprland/window" ];
-        modules-right = [ "wireplumber" "network" "memory" "cpu" "temperature" "simpleclock" ];
+        modules-right = [ "wireplumber" "network" "memory" "cpu" "temperature" "clock" ];
       };
     };
   };
@@ -98,8 +98,12 @@
     settings = {
       expandtab = true;
       shiftwidth = 2;
+      copyindent = true;
       background = "dark";
     };
+    plugins = [
+      pkgs.vimPlugins.vim-fugitive
+    ];
   };
 
   programs.foot = {

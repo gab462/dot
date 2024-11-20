@@ -1,19 +1,10 @@
-set $bg #282828
-set $red #cc241d
-set $green #98971a
-set $yellow #d79921
-set $blue #458588
-set $purple #b16286
-set $aqua #689d68
-set $gray #a89984
-set $darkgray #1d2021
 set $mod Mod4
 set $left h
 set $down j
 set $up k
 set $right l
 set $term foot
-set $menu bemenu-run --line-height=30 --fn 'Hermit 18' --tb "$bg" --tf "$yellow" --fb "$bg" --ff "$yellow" --nb "$bg" --nf "$yellow" --hb "$aqua" --hf "$bg" --sb "$aqua" --sf "$bg" --ab "$bg" --af "$yellow" | xargs swaymsg exec --
+set $menu bemenu-run --fn "Hermit 18" --line-height 30 | xargs swaymsg exec --
 
 include /etc/sway/config-vars.d/*
 
@@ -123,22 +114,8 @@ bar {
     font "Hermit 18"
 
     status_command /home/me/.config/sway/bar.sh
-
-    colors {
-        background $bg
-        statusline $yellow
-        focused_workspace    $aqua $aqua $darkgray
-        inactive_workspace   $bg $bg $yellow
-        active_workspace     $bg $bg $yellow
-        urgent_workspace     $red $red $bg
-    }
 }
 
 default_border none
-
-client.focused          $blue $blue $darkgray $purple $darkgray
-client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
-client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
-client.urgent           $red $red #000000 $red $red
 
 include /etc/sway/config.d/*

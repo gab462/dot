@@ -17,8 +17,6 @@
     pkgs.wl-clipboard
     pkgs.git
     pkgs.gh
-    pkgs.protontricks
-    pkgs.unzip
     pkgs.mpv
     pkgs.imv
     pkgs.font-awesome

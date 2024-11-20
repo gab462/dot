@@ -5,6 +5,7 @@ stow -t ~/.var/app --no-folding .
 # $ gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
 # $ flatpak list --columns=application --app
 # app.drey.Dialect
+# app.getclipboard.Clipboard
 # com.bitwarden.desktop
 # com.discordapp.Discord
 # com.github.Matoking.protontricks

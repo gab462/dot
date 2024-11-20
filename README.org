@@ -107,6 +107,7 @@ Lower GC threshold after initialization.
    '("(in-package :cl-user)" n
      n
      "(asdf:defsystem " (P "System name: " system-name) n>
+     ":serial t" n>
      ":version \"0.0.0\"" n>
      ":license \"MIT\"" n>
      ":components ((:file \"core\"))" n>

@@ -18,6 +18,8 @@
       (add-to-list 'default-frame-alist '(font . "DejaVuSans Mono-18"))
 
       (setq frame-resize-pixelwise t)
+
+      (load-theme 'modus-vivendi t)
     #+end_src
 
 *** Speedup initialization

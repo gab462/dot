@@ -67,9 +67,9 @@ require("lazy").setup({
         end
     },
     {
-        "echasnovski/mini.surround",
+        "kylechui/nvim-surround",
         config = function()
-            require("mini.surround").setup()
+            require("nvim-surround").setup()
         end
     },
     {

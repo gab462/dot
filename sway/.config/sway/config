@@ -10,6 +10,8 @@ include /etc/sway/config-vars.d/*
 
 xwayland disable
 
+font "DejaVu Sans Mono 18"
+
 #output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 output * bg /usr/share/desktop-base/emerald-theme/wallpaper/contents/images/1920x1080.svg fill
 
@@ -110,8 +112,6 @@ bindsym XF86AudioLowerVolume exec amixer sset Master 5%-
 
 bar {
     position top
-
-    font "DejaVu Sans Mono 18"
 
     status_command /home/me/.config/sway/bar.sh
 }

@@ -16,7 +16,7 @@ vim.opt.mouse = ""
 
 vim.opt.completeopt = "menuone,longest" -- ,popup (0.10)
 vim.opt.wildignore = "*.o,*.wasm,*/"
-vim.keymap.set("n", "<C-p>", ":e **/*", { noremap = true });
+vim.keymap.set("n", "<C-p>", ":e **/*");
 
 vim.opt.background = "dark"
 
@@ -40,7 +40,8 @@ vim.api.nvim_create_autocmd("FileType", {
         })
         vim.lsp.buf_attach_client(0, client)
 
-        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, { noremap = true })
-        vim.keymap.set("i", "<tab>", function() return vim.fn.pumvisible() == 1 and "<C-n>" or "<C-x><C-o>" end, { noremap = true, expr = true })
+        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end)
+        vim.keymap.set("i", "<tab>", function() return vim.fn.pumvisible() == 1 and "<C-n>" or "<C-x><C-o>" end, { expr = true })
+        vim.keymap.set("n", "<C-n>", function () vim.diagnostic.goto_next() end)
     end
 })

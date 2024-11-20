@@ -27,7 +27,7 @@
                               t "[^.]"))
   (add-to-list 'load-path dir))
 
-(dolist (pkg '(gcmh no-littering avy multiple-cursors clojure-mode inf-clojure))
+(dolist (pkg '(gcmh no-littering avy multiple-cursors))
   (require pkg))
 
 (dolist (binding '((hippie-expand . "M-/")
@@ -40,8 +40,6 @@
 
                    (mc/mark-next-like-this . "C-.")
                    (mc/skip-to-next-like-this . "C-,")
-
-                   (inf-clojure . "C-c r")
 
                    ((lambda ()
                       (interactive)

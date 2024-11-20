@@ -216,6 +216,7 @@
 
      (select-package magit)
 
+     ;; For completion, manual "(require 'compliment.core)" is needed
      (select-package inf-clojure
        (setq inf-clojure-custom-startup "clojure -M:dev"
              inf-clojure-custom-repl-type  'clojure)
@@ -246,6 +247,7 @@
      export KIVY_HOME=$XDG_DATA_HOME/kivy
      export PIPENV_VENV_IN_PROJECT=1
      export GUILE_AUTO_COMPILE=0
+     export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
      export EXINIT='set ai nu'
 
      export PATH=$PATH:~/.local/bin/

@@ -438,7 +438,7 @@
              amixer set Headphone toggle
 
      Print
-             scrot -s /home/HDD/Pictures/Leticia/Screenshots/%m%d-%H%M%S.png
+             import png:- | xclip -selection clipboard -t image/png
 
      alt + Print
              import png:- | xclip -selection clipboard -t image/png

@@ -277,21 +277,14 @@ Lower GC threshold after initialization.
 Create an isolated quicklisp environment.
 
 #+begin_src sh :tangle ~/.local/bin/qlenv :shebang "#!/bin/sh"
-  FOLDER=".qlenv/"
-  QLURL="https://beta.quicklisp.org/quicklisp.lisp"
-  QLFILE="$FOLDER""quicklisp.lisp"
-  QLFOLDER="$FOLDER""quicklisp/"
-  SETUPFILE="$QLFOLDER""setup.lisp"
-  THISFOLDER=$(pwd)"/"
-
   case $1 in
       init)
           mkdir .qlenv
-          curl $QLURL -so $QLFILE
-          sbcl --script <(echo "(load \"$QLFILE\") (quicklisp-quickstart:install :path \"$QLFOLDER\")")
+          curl https://beta.quicklisp.org/quicklisp.lisp -so .qlenv/quicklisp.lisp
+          sbcl --script <(echo "(load \".qlenv/quicklisp.lisp\") (quicklisp-quickstart:install :path \".qlenv/quicklisp/\")")
           ;;
       repl)
-          sbcl --load $SETUPFILE --eval "(push \"$THISFOLDER\" asdf:*central-registry*)"
+          sbcl --load .qlenv/quicklisp/setup.lisp --eval "(push \"$(pwd)/\" asdf:*central-registry*)"
           ;;
   esac
 #+end_src

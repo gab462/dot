@@ -8,8 +8,8 @@
 (set-face-attribute 'mode-line nil :box nil)
 ;(set-frame-parameter nil 'alpha-background 90)
 
-(add-to-list 'default-frame-alist '(font . "Monospace-18"))
-(add-to-list 'default-frame-alist '(reverse . t))
+(add-to-list 'default-frame-alist '(font . "Gohu Font 14 Nerd Font-14"))
+;; (add-to-list 'default-frame-alist '(reverse . t))
 
 (tool-bar-mode -1)
 (scroll-bar-mode -1)

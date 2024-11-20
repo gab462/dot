@@ -10,10 +10,7 @@
       mc/always-run-for-all t)
 
 (setq-default tab-always-indent 'complete
-              indent-tabs-mode nil
-              tab-width 4)
-
-(defvaralias 'c-basic-offset 'tab-width)
+              c-indentation-style 'linux)
 
 (put 'dired-find-alternate-file 'disabled nil)
 
@@ -56,6 +53,22 @@
 (delete-selection-mode t)
 (show-paren-mode t)
 (gcmh-mode t)
+
+(defmacro minimize-theme ()
+  `(custom-theme-set-faces
+    'user
+    '(font-lock-comment-face ((t (:foreground "darkgreen" :inherit normal))))
+    '(font-lock-doc-face ((t (:foreground "darkgreen" :inherit normal))))
+    '(font-lock-string-face ((t (:foreground "darkblue" :inherit normal))))
+    ,@(mapcar (lambda (face) `'(,face ((t (:inherit normal)))))
+	      '(font-lock-function-name-face
+		font-lock-keyword-face
+		font-lock-constant-face
+		font-lock-builtin-face
+		font-lock-variable-name-face
+		font-lock-type-face))))
+
+(minimize-theme)
 
 (when (equal system-type 'darwin)
   (toggle-frame-maximized))

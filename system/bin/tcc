@@ -4,6 +4,6 @@ MUSL=$HOME/opt/musl
 TCC=$HOME/opt/tcc
 
 CFLAGS="-nostdinc -I$MUSL/include"
-LDFLAGS="-nostdlib $MUSL/lib/crti.o $MUSL/lib/crt1.o $MUSL/lib/crtn.o -L$MUSL/lib -lc -L$TCC/lib/tcc -ltcc1 -nostdlib -static"
+LDFLAGS="-nostdlib $MUSL/lib/crti.o $MUSL/lib/crt1.o $MUSL/lib/crtn.o -L$MUSL/lib -lc -L$TCC/lib/tcc -ltcc1 -static"
 
 $TCC/bin/tcc $CFLAGS $@ $LDFLAGS

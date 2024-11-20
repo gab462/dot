@@ -182,7 +182,9 @@
                     (run-lisp "qlenv repl")))))
    #+end_src
 
-** Extra packages
+** COMMENT Extra packages
+
+   Install with =package-install-selected-packages=.
 
    #+begin_src elisp :tangle ~/.config/emacs/init.el
      (require 'package)

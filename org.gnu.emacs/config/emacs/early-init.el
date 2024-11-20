@@ -4,14 +4,15 @@
 
 (pcase system-type
   ('gnu/linux
-   (add-to-list 'default-frame-alist '(font . "Terminus (TTF)-18")))
+   (add-to-list 'default-frame-alist '(font . "Monospace-18")))
   ('darwin
    (setq mac-command-modifier 'meta)
    (set-face-attribute 'default nil :height 200)
    ;; (add-to-list 'default-frame-alist '(undecorated . t))
    (add-to-list 'default-frame-alist '(fullscreen . maximized))))
 
-(add-to-list 'default-frame-alist '(reverse . t))
+;; (add-to-list 'default-frame-alist '(reverse . t))
+(load-theme 'adwaita)
 (set-face-attribute 'mode-line nil :box nil)
 
 (setq package-enable-at-startup nil)

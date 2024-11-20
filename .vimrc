@@ -4,7 +4,7 @@ let g:netrw_dirhistmax=0
 set viminfofile=NONE
 
 filetype plugin indent on
-syntax on
+syntax off
 
 set timeout
 set ttimeoutlen=0
@@ -15,8 +15,8 @@ set incsearch ignorecase smartcase
 
 set bg=light
 set termguicolors
-autocmd Colorscheme quiet hi Normal guibg=#ffffea guifg=#000000
-colorscheme quiet
+hi Normal guibg=#ffffea guifg=#000000
+hi EndOfBuffer guifg=NONE
 
 set et sts=2 sw=2
 

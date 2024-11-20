@@ -169,6 +169,45 @@
                     (run-lisp "qlenv repl")))))
    #+end_src
 
+** External Packages
+
+   Install with =package-install-selected-packages=.
+
+   #+begin_src elisp :tangle ~/.config/emacs/init.el
+     (require 'package)
+
+     (defmacro select-package (package &rest body)
+       `(progn
+          (add-to-list 'package-selected-packages ',package)
+          ,(append `(when (require ',package nil t)) body)))
+
+     (put 'select-package 'lisp-indent-function 'defun)
+
+     (select-package modus-themes
+       (load-theme 'modus-vivendi t)
+       (set-face-attribute 'mode-line nil :box nil))
+
+     (select-package corfu
+       (setq corfu-auto t
+             corfu-quit-no-match t)
+       (corfu-global-mode t))
+
+     (select-package vertico
+       (setq minibuffer-prompt-properties '(read-only t cursor-intangible t face minibuffer-prompt))
+       (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+
+       (setq enable-recursive-minibuffers t)
+
+       (vertico-mode t))
+
+     (select-package marginalia
+       (marginalia-mode t))
+
+     (select-package eglot)
+
+     (select-package magit)
+   #+end_src
+
 * Shell
 
 ** Environment Variables

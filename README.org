@@ -104,7 +104,7 @@ Lower GC threshold after initialization.
   (require 'tempo)
 
   (tempo-define-template
-   "sys"
+   "cls"
    '("(in-package :cl-user)" n
      n
      "(asdf:defsystem " (P "System name: " system-name) n>
@@ -112,26 +112,26 @@ Lower GC threshold after initialization.
      ":license \"MIT\"" n>
      ":components ((:file \"core\"))" n>
      ":depends-on ())")
-   "sys")
+   "cls")
 
   (tempo-define-template
-   "pkg"
+   "clp"
    '("(in-package :cl-user)" n
      n
      "(defpackage " (P "Package name: " package-name) n>
      "(:use :cl))" n>
      n
      "(in-package :" (s package-name) ")" n n)
-   "pkg")
+   "clp")
 
   (tempo-define-template
-   "py"
+   "pym"
    '("def main() -> None:" n>
      "print(\"Hello, World!\")" n
      n n
      "if __name__ == '__main__':" n>
      "main()")
-   "py")
+   "pym")
 #+end_src
 
 ** Major modes

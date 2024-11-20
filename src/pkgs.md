@@ -13,4 +13,5 @@ intel-media-va-driver
 build-essential git indent automake
 emacs-pgtk fonts-noto-color-emoji
 valgrind cppcheck gdb
-libsdl2-dev
+libsdl2-dev wayland-protocols
+musl-dev musl-tools

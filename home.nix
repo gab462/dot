@@ -12,16 +12,16 @@
 
   home.packages = [
     pkgs.bemenu
-    pkgs.osu-lazer-bin
     pkgs.grimblast
     pkgs.wl-clipboard
+    pkgs.font-awesome
     pkgs.git
     pkgs.gh
     pkgs.mpv
     pkgs.imv
-    pkgs.font-awesome
-    pkgs.lutris
     pkgs.gcc
+    pkgs.lutris
+    pkgs.osu-lazer-bin
   ];
 
   programs.bash = {

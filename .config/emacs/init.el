@@ -10,7 +10,10 @@
       mc/always-run-for-all t)
 
 (setq-default tab-always-indent 'complete
-              indent-tabs-mode nil)
+              indent-tabs-mode nil
+              tab-width 4)
+
+(defvaralias 'c-basic-offset 'tab-width)
 
 (put 'dired-find-alternate-file 'disabled nil)
 

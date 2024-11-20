@@ -72,12 +72,18 @@
   (load bootstrap-file nil 'nomessage))
 
 (use-package no-littering
-  :init (setq custom-file
-              (no-littering-expand-etc-file-name
-               "custom.el")))
+  :config (setq custom-file
+                (no-littering-expand-etc-file-name
+                 "custom.el")))
 
 (use-package gcmh
   :config (gcmh-mode 1))
+
+(use-package treesit-auto
+  :init (setq treesit-auto-install 'prompt)
+  :config (global-treesit-auto-mode 1))
+
+(use-package magit)
 
 (use-package naysayer-theme
   :straight (naysayer-theme
@@ -95,11 +101,5 @@
   :bind (("C-;" . avy-goto-word-1)
          ("C-'" . 'avy-goto-char-timer)))
 
-(use-package treesit-auto
-  :init (setq treesit-auto-install 'prompt)
-  :config (global-treesit-auto-mode 1))
-
 (use-package expreg
   :bind (("C-=" . expreg-expand)))
-
-(use-package magit)

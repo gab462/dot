@@ -38,26 +38,21 @@ require("lazy").setup({
                     enable = true
                 }
             })
-        end
-    },
-    {
-        "Mofiqul/adwaita.nvim",
-        config = function()
-            vim.g.adwaita_transparent = true
-            vim.cmd.colorscheme("adwaita")
-        end
-    },
-    {
-        "nvim-lualine/lualine.nvim",
-        config = function()
-            require("lualine").setup({
-                options = {
-                    icons_enabled = false,
-                    theme = "adwaita",
-                    section_separators = "",
-                    component_separators = ""
-                },
-            })
+
+            vim.cmd.colorscheme("quiet")
+            vim.opt.termguicolors = false
+
+            vim.api.nvim_set_hl(0, "Normal", { ctermbg = "none" })
+
+            colors = {
+                Comment = "green",
+                Constant = "blue",
+                PreProc = "red"
+            }
+
+            for k, v in pairs(colors) do
+                vim.api.nvim_set_hl(0, k, { ctermfg = v })
+            end
         end
     },
     {

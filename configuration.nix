@@ -57,6 +57,7 @@
   };
 
   security.rtkit.enable = true;
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -71,6 +72,8 @@
 
   hardware.opengl = {
     enable = true;
+    driSupport32Bit = true;
+
     extraPackages = with pkgs; [
       intel-media-driver
     ];

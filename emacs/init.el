@@ -30,6 +30,8 @@
 
 (put 'dired-find-alternate-file 'disabled nil)
 
+(add-hook 'dired-mode-hook 'dired-hide-details-mode)
+
 (require 'ansi-color)
 (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
 
@@ -93,3 +95,7 @@
 
 (use-package eldoc-box
   :config (add-hook 'eglot-managed-mode-hook #'eldoc-box-hover-mode t))
+
+(use-package nix-mode)
+
+(use-package haskell-mode)

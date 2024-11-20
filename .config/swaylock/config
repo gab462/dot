@@ -1,4 +1,4 @@
-image=/usr/share/desktop-base/emerald-theme/plymouth/Emerald_plymouth.svg
-font=DejaVu Sans Mono
+color=#777777
+font=Terminus (TTF)
 font-size=18
 indicator-radius=75

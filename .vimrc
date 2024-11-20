@@ -15,10 +15,13 @@ set noswapfile nowritebackup nobackup
 set ai si
 set incsearch ignorecase smartcase
 
-autocmd Colorscheme quiet hi Normal ctermbg=NONE
-			\ | hi Constant ctermfg=darkblue
-			\ | hi Comment ctermfg=darkgreen
-			\ | hi PreProc ctermfg=darkred
+set bg=light
+set termguicolors
+
+autocmd Colorscheme quiet hi Normal guibg=#ffffea guifg=#000000
+			\ | hi Constant guifg=#000000
+			\ | hi Comment guifg=#000000
+			\ | hi PreProc guifg=#000000
 colorscheme quiet
 
 set et sts=2 sw=2

@@ -1,5 +1,166 @@
 #+PROPERTY: :mkdirp yes
 
+* Apps
+
+** Emacs
+
+#+begin_src elisp :tangle ~/.config/emacs/init.el
+  ;; Aesthetics
+
+  (scroll-bar-mode -1)
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+
+  ;; (load-theme 'leuven-dark)
+  (load-theme 'modus-vivendi)
+
+  (set-face-attribute 'default nil :family "Liberation Mono" :height 180)
+  (set-face-attribute 'mode-line nil :box nil)
+
+  (when (eq system-type 'windows-nt)
+    (add-hook 'window-setup-hook 'toggle-frame-maximized t))
+
+  ;; Options
+
+  (setq make-backup-files nil
+        create-lockfiles nil
+        auto-save-default nil
+        auto-save-list-file-prefix nil)
+
+  (setq kill-whole-line t
+        show-paren-delay 0
+        ring-bell-function 'ignore)
+
+  (setq-default tab-always-indent 'complete
+            indent-tabs-mode nil
+            c-default-style "k&r")
+
+  (put 'dired-find-alternate-file 'disabled nil)
+
+  ;; Minor modes
+
+  (electric-pair-mode t)
+  (delete-selection-mode t)
+  (show-paren-mode t)
+
+  (windmove-default-keybindings)
+
+  ;; Remaps / Aliases
+  ;; Usable editing keybindings: C-= C-; C-' C-, C-. M-+ M-* M-_ M-#
+  ;; C-z - remappable as already bound to C-x C-z
+
+  (defalias 'yes-or-no-p 'y-or-n-p)
+  (global-set-key (kbd "M-/") 'hippie-expand)
+  (global-set-key (kbd "C-x k") 'kill-this-buffer)
+
+  (global-set-key (kbd "M-+") 'raise-sexp)
+#+end_src
+
+** Alacritty
+
+#+begin_src yml :tangle ~/.config/alacritty/alacritty.yml
+  font:
+    normal:
+      family: Terminus
+      style: Regular
+
+    bold:
+      family: Terminus
+      style: Bold
+
+    italic:
+      family: Terminus
+      style: Italic
+
+    bold_italic:
+      family: Terminus
+      style: Bold Italic
+
+    size: 23
+
+  # XTerm's default colors
+  colors:
+    # Default colors
+    primary:
+      background: '0x000000'
+      foreground: '0xffffff'
+    # Normal colors
+    normal:
+      black:   '0x000000'
+      red:     '0xcd0000'
+      green:   '0x00cd00'
+      yellow:  '0xcdcd00'
+      blue:    '0x0000ee'
+      magenta: '0xcd00cd'
+      cyan:    '0x00cdcd'
+      white:   '0xe5e5e5'
+
+    # Bright colors
+    bright:
+      black:   '0x7f7f7f'
+      red:     '0xff0000'
+      green:   '0x00ff00'
+      yellow:  '0xffff00'
+      blue:    '0x5c5cff'
+      magenta: '0xff00ff'
+      cyan:    '0x00ffff'
+      white:   '0xffffff'
+#+end_src
+
+** Vim
+
+#+begin_src vim :tangle ~/.vimrc
+  set nocompatible
+
+  let g:netrw_dirhistmax = 0
+  set viminfofile=NONE
+  set clipboard=exclude:.*
+
+  filetype plugin indent on
+
+  syntax on
+  set bg=dark
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+
+  set expandtab
+  set timeout
+  set ttimeoutlen=0
+  set noswapfile nowritebackup nobackup
+  set autoindent
+  set incsearch ignorecase smartcase
+#+end_src
+
+** Qutebrowser
+
+#+begin_src python :tangle ~/.config/qutebrowser/config.py
+  config.load_autoconfig(False)
+
+  c.content.private_browsing = True
+
+  c.downloads.location.directory = '/home/HDD/Downloads'
+
+  c.statusbar.show = 'in-mode'
+
+  c.statusbar.padding = {'top': 6, 'right': 8, 'bottom': 6, 'left': 8}
+
+  c.tabs.favicons.scale = 1
+
+  c.tabs.padding = {'top': 6, 'right': 8, 'bottom': 6, 'left': 8}
+
+  c.tabs.show = 'multiple'
+
+  c.tabs.indicator.width = 1
+
+  c.colors.webpage.darkmode.enabled = True
+
+  c.url.start_pages = 'https://start.duckduckgo.com/'
+
+  c.colors.downloads.system.bg = 'none'
+  c.colors.tabs.indicator.system = 'none'
+#+end_src
+
 * Shell
 
 ** Environment Variables
@@ -130,169 +291,5 @@ Create an isolated quicklisp environment.
   cache=${XDG_CACHE_HOME}/npm
   tmp=${XDG_RUNTIME_DIR}/npm
   init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
-#+end_src
-
-* Apps
-
-** Emacs
-
-#+begin_src elisp :tangle ~/.config/emacs/init.el
-  (set-face-attribute 'default nil :family "Liberation Mono" :height 180)
-
-  (when (eq system-type 'windows-nt)
-    (add-hook 'window-setup-hook 'toggle-frame-maximized t))
-
-  (setq make-backup-files nil
-        create-lockfiles nil
-        auto-save-default nil)
-
-  (setq kill-whole-line t
-        show-paren-delay 0
-        ring-bell-function 'ignore)
-
-  (setq-default tab-always-indent 'complete
-            indent-tabs-mode nil
-            c-default-style "k&r")
-
-  (put 'dired-find-alternate-file 'disabled nil)
-
-  (defalias 'yes-or-no-p 'y-or-n-p)
-
-  (electric-pair-mode t)
-  (delete-selection-mode t)
-  (show-paren-mode t)
-
-  ;; Packages
-  ;; Bindable editing keys: C-= C-. C-, C-; C-'
-
-  (require 'package)
-
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-
-  (add-to-list 'package-selected-packages 'expand-region)
-  (when (require 'expand-region nil t)
-    (global-set-key (kbd "C-=") 'er/expand-region))
-
-  (add-to-list 'package-selected-packages 'multiple-cursors)
-  (when (require 'multiple-cursors nil t)
-    (setq mc/always-run-for-all t)
-    (global-set-key (kbd "C-.") 'mc/mark-next-like-this)
-    (global-set-key (kbd "C-,") 'mc/mark-all-like-this))
-
-  (add-to-list 'package-selected-packages 'avy)
-  (when (require 'avy nil t)
-    (global-set-key (kbd "C-;") 'avy-goto-char-2))
-
-  (add-to-list 'package-selected-packages 'ace-window)
-  (when (require 'ace-window nil t)
-    (global-set-key (kbd "C-'") 'ace-window))
-
-  ;; Maybe: Smartparen/Paredit, EXWM
-  ;; Prob. not: Magit, Elfeed
-#+end_src
-
-** Alacritty
-
-#+begin_src yml :tangle ~/.config/alacritty/alacritty.yml
-  font:
-    normal:
-      family: Terminus
-      style: Regular
-
-    bold:
-      family: Terminus
-      style: Bold
-
-    italic:
-      family: Terminus
-      style: Italic
-
-    bold_italic:
-      family: Terminus
-      style: Bold Italic
-
-    size: 23
-
-  # XTerm's default colors
-  colors:
-    # Default colors
-    primary:
-      background: '0x000000'
-      foreground: '0xffffff'
-    # Normal colors
-    normal:
-      black:   '0x000000'
-      red:     '0xcd0000'
-      green:   '0x00cd00'
-      yellow:  '0xcdcd00'
-      blue:    '0x0000ee'
-      magenta: '0xcd00cd'
-      cyan:    '0x00cdcd'
-      white:   '0xe5e5e5'
-
-    # Bright colors
-    bright:
-      black:   '0x7f7f7f'
-      red:     '0xff0000'
-      green:   '0x00ff00'
-      yellow:  '0xffff00'
-      blue:    '0x5c5cff'
-      magenta: '0xff00ff'
-      cyan:    '0x00ffff'
-      white:   '0xffffff'
-#+end_src
-
-** Vim
-
-#+begin_src vim :tangle ~/.vimrc
-  set nocompatible
-
-  let g:netrw_dirhistmax = 0
-  set viminfofile=NONE
-  set clipboard=exclude:.*
-
-  filetype plugin indent on
-
-  syntax on
-  set bg=dark
-  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-
-  set expandtab
-  set timeout
-  set ttimeoutlen=0
-  set noswapfile nowritebackup nobackup
-  set autoindent
-  set incsearch ignorecase smartcase
-#+end_src
-
-** Qutebrowser
-
-#+begin_src python :tangle ~/.config/qutebrowser/config.py
-  config.load_autoconfig(False)
-
-  c.content.private_browsing = True
-
-  c.downloads.location.directory = '/home/HDD/Downloads'
-
-  c.statusbar.show = 'in-mode'
-
-  c.statusbar.padding = {'top': 6, 'right': 8, 'bottom': 6, 'left': 8}
-
-  c.tabs.favicons.scale = 1
-
-  c.tabs.padding = {'top': 6, 'right': 8, 'bottom': 6, 'left': 8}
-
-  c.tabs.show = 'multiple'
-
-  c.tabs.indicator.width = 1
-
-  c.colors.webpage.darkmode.enabled = True
-
-  c.url.start_pages = 'https://start.duckduckgo.com/'
-
-  c.colors.downloads.system.bg = 'none'
-  c.colors.tabs.indicator.system = 'none'
 #+end_src
 

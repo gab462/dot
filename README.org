@@ -12,7 +12,7 @@
   (menu-bar-mode -1)
 
   ;; (load-theme 'leuven-dark)
-  (load-theme 'modus-vivendi)
+  ;; (load-theme 'modus-vivendi)
 
   (set-face-attribute 'default nil :family "Liberation Mono" :height 180)
   (set-face-attribute 'mode-line nil :box nil)
@@ -32,8 +32,8 @@
         ring-bell-function 'ignore)
 
   (setq-default tab-always-indent 'complete
-            indent-tabs-mode nil
-            c-default-style "k&r")
+                indent-tabs-mode nil
+                c-default-style "gnu")
 
   (put 'dired-find-alternate-file 'disabled nil)
 
@@ -46,10 +46,11 @@
   (windmove-default-keybindings)
 
   ;; Remaps / Aliases
-  ;; Usable editing keybindings: C-= C-; C-' C-, C-. M-+ M-* M-_ M-#
+  ;; Unused editing keybindings: C-= C-; C-' C-, C-. M-+ M-* M-_ M-#
   ;; C-z - remappable as already bound to C-x C-z
 
   (defalias 'yes-or-no-p 'y-or-n-p)
+
   (global-set-key (kbd "M-/") 'hippie-expand)
   (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
@@ -61,22 +62,25 @@
 #+begin_src yml :tangle ~/.config/alacritty/alacritty.yml
   font:
     normal:
-      family: Terminus
+      family: Ubuntu Mono
       style: Regular
 
     bold:
-      family: Terminus
+      family: Ubuntu Mono
       style: Bold
 
     italic:
-      family: Terminus
+      family: Ubuntu Mono
       style: Italic
 
     bold_italic:
-      family: Terminus
+      family: Ubuntu Mono
       style: Bold Italic
 
     size: 23
+
+  window:
+    opacity: 0.85
 
   # XTerm's default colors
   colors:
@@ -139,6 +143,8 @@
 
   c.content.private_browsing = True
 
+  c.content.notifications.enabled = False
+
   c.downloads.location.directory = '/home/HDD/Downloads'
 
   c.statusbar.show = 'in-mode'
@@ -187,7 +193,6 @@
   export PATH=$PATH:~/.local/bin/
   export EDITOR=mg
   export VISUAL=mg
-  export ALSA_CARD=Headset
 
   export KEYTIMEOUT=1
 
@@ -222,10 +227,11 @@
 ** Aliases
 
 #+begin_src sh :tangle ~/.config/zsh/.aliases
-  alias ls='ls --file-type --group-directories-first'
+  alias ls='ls --color=auto --group-directories-first'
   alias grep='grep --color=auto'
   alias cp='cp -i'
   alias mv='mv -i'
+  alias em='emacs -nw'
 
   ext ()
   {

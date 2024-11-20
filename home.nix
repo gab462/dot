@@ -15,6 +15,17 @@
       lutris osu-lazer-bin
       gawk jq hexdump # pipewire-screenaudio
     ];
+
+    shellAliases = {
+      nixos-upgrade = ''
+        sudo nixos-rebuild switch --upgrade \
+          && nix-channel --update \
+          && home-manager switch \
+          && sudo nix-collect-garbage -d \
+          && nix-collect-garbage -d \
+          && sudo nixos-rebuild switch
+      '';
+    };
   };
 
   nixpkgs.config.allowUnfree = true;

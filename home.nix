@@ -141,25 +141,7 @@
           border-bottom: 2px solid #327bd1;
       }
 
-      #wireplumber {
-        padding-right: 10px
-      }
-
-      #memory {
-        padding-right: 10px
-      }
-
-      #cpu {
-        padding-right: 10px
-      }
-
-      #temperature {
-        padding-right: 10px
-      }
-
-      #clock {
-	padding-right: 10px
-      }
+      #wireplumber, #memory, #cpu, #temperature, #clock { padding-right: 10px }
     '';
   };
 

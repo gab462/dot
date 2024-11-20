@@ -1,0 +1,7 @@
+#!/bin/sh
+
+TERM=/usr/bin/foot
+PATH=$HOME/bin:$HOME/opt/sbase/bin
+SHELL=/usr/bin/dash
+
+$TERM $SHELL

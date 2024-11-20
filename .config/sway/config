@@ -30,6 +30,7 @@ input 1133:50184:Logitech_USB_Trackball {
 }
 
 bindsym $mod+Return exec $term
+bindsym $mod+Shift+Return exec nix
 
 bindsym $mod+q kill
 

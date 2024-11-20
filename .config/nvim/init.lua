@@ -15,10 +15,6 @@ vim.opt.backup = false
 vim.opt.swapfile = false
 vim.opt.mouse = ""
 
-vim.opt.wildignore = "**/__pycache__/**,__pycache__/**"
-
-vim.g.sexp_filetypes = "hy"
-
 vim.keymap.set("n", "<C-p>", ":e **/*");
 
 vim.api.nvim_create_autocmd("Colorscheme", { callback = function()

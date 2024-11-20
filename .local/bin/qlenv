@@ -1,0 +1,13 @@
+#!/bin/sh
+
+case $1 in
+    init)
+        mkdir .qlenv
+        curl https://beta.quicklisp.org/quicklisp.lisp -so .qlenv/quicklisp.lisp
+        sbcl --eval '(load ".qlenv/quicklisp.lisp")' --eval '(quicklisp-quickstart:install :path ".qlenv/quicklisp/")' --quit
+        ;;
+    repl)
+        sbcl --load .qlenv/quicklisp/setup.lisp --eval \
+            "(asdf:initialize-source-registry '(:source-registry (:directory \"$PWD\") :inherit-configuration))"
+        ;;
+esac

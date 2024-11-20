@@ -1,0 +1,6 @@
+.config/emacs/var
+.config/emacs/etc
+flatpak-emacs-first-run
+flatpak-emacs-sdk-update-23.08
+npmrc
+user-dirs.dirs

@@ -15,5 +15,4 @@ remove old aur packages: pacman -Sc
 TODO:
 aur/lr2oraja-endlessdream
 polyversal-patcher-bin (as-deps?)
-fix miku megamix (high fps, nospy mod)
-pipewire-screenaudio
+steam SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0

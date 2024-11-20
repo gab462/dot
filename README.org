@@ -16,6 +16,15 @@
         show-paren-delay 0
         ring-bell-function 'ignore)
 
+  (setq browse-url-browser-function 'eww-browse-url
+        shr-inhibit-images t
+        shr-use-fonts nil
+        shr-use-colors nil
+        shr-cookie-policy nil
+        eww-history-limit -1
+        shr-indentation 2
+        shr-width 70)
+
   (setq-default tab-always-indent 'complete
                 indent-tabs-mode nil
                 c-default-style "gnu")

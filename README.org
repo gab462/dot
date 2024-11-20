@@ -29,7 +29,8 @@
 
       (setq initial-major-mode 'fundamental-mode)
 
-      ;; (setq package-enable-at-startup nil)
+      ;; Comment this to be able to load packages
+      (setq package-enable-at-startup nil)
     #+end_src
 
     Lower GC threshold after initialization.
@@ -61,8 +62,7 @@
    #+begin_src elisp :tangle ~/.config/emacs/init.el
      (setq kill-whole-line t
            display-time-day-and-date t
-           show-paren-delay 0
-           custom-file (expand-file-name "custom.el" user-emacs-directory))
+           show-paren-delay 0)
 
      (setq-default indent-tabs-mode nil
                    tab-always-indent 'complete

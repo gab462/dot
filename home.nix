@@ -186,14 +186,7 @@
     ];
 
     extraConfig = let
-      comp2 = f: g: x: f (g x);
-      id = x: x;
-      compose = builtins.foldl' comp2 id;
-      attrString = with builtins; fn: compose [
-        (concatStringsSep " ")
-        attrValues
-        (mapAttrs fn)
-      ];
+      attrString = with builtins; fn: attrs: concatStringsSep " " (attrValues (mapAttrs fn attrs));
       emacsSettings = {
         setq, setq-default,
           global-modes, bind,

@@ -34,5 +34,8 @@ vim.api.nvim_create_autocmd("FileType", {
             root_dir = ".",
         })
         vim.lsp.buf_attach_client(0, client)
+
+	vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, { noremap = true })
+	vim.keymap.set("i", "<tab>", function() return vim.fn.pumvisible() == 1 and "<C-n>" or "<C-x><C-o>" end, { noremap = true, expr = true })
     end
 })

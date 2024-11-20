@@ -16,10 +16,9 @@ set ai si
 set incsearch ignorecase smartcase
 
 autocmd Colorscheme quiet hi Normal ctermbg=NONE
-			\ | hi String ctermfg=lightblue
-			\ | hi Character ctermfg=lightblue
-			\ | hi Comment ctermfg=lightgreen
-			\ | hi PreProc ctermfg=lightred
+			\ | hi Constant ctermfg=darkblue
+			\ | hi Comment ctermfg=darkgreen
+			\ | hi PreProc ctermfg=darkred
 colorscheme quiet
 
 set wildmenu

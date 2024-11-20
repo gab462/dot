@@ -22,6 +22,7 @@
     pkgs.mpv
     pkgs.imv
     pkgs.font-awesome
+    pkgs.lutris
   ];
 
   programs.bash = {

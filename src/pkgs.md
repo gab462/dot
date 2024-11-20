@@ -11,7 +11,7 @@ intel-media-va-driver
 
 ## Programming
 build-essential git indent automake
-emacs-pgtk fonts-noto-color-emoji
+emacs-pgtk fonts-noto-color-emoji fonts-terminus
 valgrind cppcheck gdb
 libsdl2-dev wayland-protocols
 musl-dev musl-tools

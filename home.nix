@@ -23,7 +23,6 @@
     pkgs.imv
     pkgs.font-awesome
     pkgs.lutris
-    (pkgs.nerdfonts.override { fonts = [ "iA-Writer" ]; })
   ];
 
   programs.bash = {
@@ -31,10 +30,6 @@
     profileExtra = ''
       Hyprland
     '';
-  };
-
-  home.sessionVariables = {
-    EDITOR = "vim";
   };
 
   programs.home-manager.enable = true;
@@ -57,7 +52,8 @@
       "$mod" = "SUPER";
 
       bind = [
-        "$mod, RETURN, exec, foot"
+        "$mod, RETURN, exec, emacs -f eshell"
+	"$mod, E, exec, emacs"
         "$mod, D, exec, bemenu-run --fn \"Monospace 18\" -H 31"
         "$mod, Q, killactive"
         "$mod, H, movefocus, l"
@@ -125,6 +121,7 @@
       #waybar {
         background: rgba(0, 0, 0, 0.5);
         color: white;
+        font-family: iA Writer Quattro S;
         font-size: 18pt;
         border-radius: 30px;
       }
@@ -137,31 +134,6 @@
 
       #wireplumber, #memory, #cpu, #temperature, #clock { padding-right: 10px }
     '';
-  };
-
-  programs.vim = {
-    enable = true;
-
-    settings = {
-      expandtab = true;
-      shiftwidth = 2;
-      copyindent = true;
-      background = "dark";
-    };
-
-    plugins = [
-      pkgs.vimPlugins.vim-fugitive
-    ];
-  };
-
-  programs.foot = {
-    enable = true;
-
-    settings = {
-      main.font = "Monospace:size=18";
-
-      colors.alpha = 0.9;
-    };
   };
 
   programs.obs-studio = {

@@ -7,16 +7,16 @@ vim.opt.number = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.guicursor = ""
-
-vim.opt.backup = false
-vim.opt.swapfile = false
-
-vim.opt.mouse = ""
-
 vim.opt.laststatus = 3
 vim.opt.winbar = "%=%f %m"
 
+vim.opt.backup = false
+vim.opt.swapfile = false
+vim.opt.mouse = ""
+
 vim.opt.completeopt = "menuone,longest" -- ,popup (0.10)
+vim.opt.wildignore = "*.o,*.wasm,*/"
+vim.keymap.set("n", "<C-p>", ":e **/*", { noremap = true });
 
 vim.opt.background = "dark"
 

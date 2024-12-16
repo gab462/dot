@@ -1,0 +1,11 @@
+#!/bin/sh
+
+OUTPUT=$(wpctl status \
+    | xargs \
+    | grep -Po 'Sinks: .*?Sources' \
+    | tr │ '\n' \
+    | grep -o '[\*\s]*[0-9]\+.*' \
+    | wmenu -f "Monospace 18" -i \
+    | grep -o '^[0-9]\+')
+
+wpctl set-default $OUTPUT

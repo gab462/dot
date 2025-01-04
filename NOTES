@@ -7,12 +7,9 @@ test vaapi: mpv --hwdec=auto [vid]
 temporary install: pacman -S --asdeps [pkg]
 list packages: pacman -Qe
 list orphan packages: pacman -Qdtq
+
 aurutils setup: https://gist.github.com/geosharma/afe1ea9ebe58cb67aaaba62a0d47bc7a
 install aur package: aur sync [pkg] && pacman -S [pkg]
-update aur packages: aur sync -u && pacman -Syu
 remove old aur packages: pacman -Sc
-
-TODO:
-aur/lr2oraja-endlessdream
-polyversal-patcher-bin (as-deps?)
-steam SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+update aur packages: aur sync -u
+update git aur packages: aur sync -u --rebuild [pkg]

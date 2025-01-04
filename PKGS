@@ -22,6 +22,7 @@ linux
 linux-firmware
 mako
 man-db
+man-pages
 mpv
 neovim
 networkmanager
@@ -29,17 +30,18 @@ obs-pipewire-audio-capture
 obs-studio
 obs-vkcapture
 osu-lazer-bin
+otf-ipafont
 pipewire
 pipewire-alsa
 pipewire-pulse
 pipewire-screenaudio
 realtime-privileges
 steam
-steamtinkerlaunch-git
 sway
 sway-contrib
 swaybg
 ttf-liberation
+valgrind
 vulkan-intel
 wireplumber
 wl-clipboard

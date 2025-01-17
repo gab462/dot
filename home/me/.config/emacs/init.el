@@ -57,6 +57,8 @@
 (use-package gcmh
   :config (gcmh-mode t))
 
+(use-package magit)
+
 (use-package multiple-cursors
   :init (setq mc/always-run-for-all t)
   :bind (("C-." . mc/mark-next-like-this)

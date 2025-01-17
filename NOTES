@@ -1,5 +1,4 @@
 # systemctl enable cpupower
-# download fragment-mono font
 # add user to realtime group
 # setup aurutils local repo
 

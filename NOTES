@@ -9,6 +9,5 @@ list orphan packages: pacman -Qdtq
 
 aurutils setup: https://gist.github.com/geosharma/afe1ea9ebe58cb67aaaba62a0d47bc7a
 install aur package: aur sync [pkg] && pacman -S [pkg]
-remove old aur packages: pacman -Sc
 update aur packages: aur sync -u
 update git aur packages: aur sync -u --rebuild [pkg]

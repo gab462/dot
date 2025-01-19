@@ -1,5 +1,3 @@
-# $ pacman -Qe | sed 's/ .*//'
-
 aurutils
 base
 base-devel

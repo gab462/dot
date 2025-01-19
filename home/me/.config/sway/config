@@ -10,7 +10,7 @@ set $term foot
 set $menu wmenu-run -f "Monospace 18"
 
 output * {
-    bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+    bg /home/me/.local/share/backgrounds/alien/multi-paradigm-programming-language.png fill
     max_render_time off
     allow_tearing yes
 }

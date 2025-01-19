@@ -12,6 +12,7 @@ for file in $FILES; do
         echo Diff:
         diff $file ${file:1}
         echo
+        cp ${file:1} $file
     fi
 done
 

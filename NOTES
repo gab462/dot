@@ -2,6 +2,8 @@
 # add user to realtime group
 # setup aurutils local repo
 
+bg source: https://github.com/t-sin/lisp-alien-wallpapers
+
 test vaapi: mpv --hwdec=auto [vid]
 temporary install: pacman -S --asdeps [pkg]
 list packages: pacman -Qe

@@ -36,7 +36,6 @@ pipewire-alsa
 pipewire-pulse
 pipewire-screenaudio
 realtime-privileges
-sbcl
 steam
 sway
 sway-contrib

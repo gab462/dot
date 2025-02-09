@@ -36,7 +36,7 @@
 (use-package emacs
   :init (setq-default tab-always-indent 'complete
                       indent-tabs-mode nil
-                      c-default-style "stroustrup")
+                      c-default-style "linux")
   :bind (("C-x k" . kill-this-buffer)
          ("M-*" . raise-sexp)
          ("C-=" . mark-sexp))

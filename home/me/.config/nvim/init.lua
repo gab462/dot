@@ -5,4 +5,3 @@ vim.opt.laststatus = 3
 vim.opt.winbar = "%=%m %f"
 
 vim.opt.termguicolors = false
-vim.cmd.colorscheme("vim")

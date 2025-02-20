@@ -7,7 +7,7 @@ set $right l
 
 set $term foot
 
-set $menu wmenu-run -f "Monospace 18"
+set $menu wmenu-run -f "Monospace 18" -N 000000 -n ffffff
 
 output * {
     bg /home/me/.local/share/backgrounds/bg.png fill
@@ -138,7 +138,7 @@ bar {
 
     colors {
         statusline #ffffff
-        background #323232
+        background #000000
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }

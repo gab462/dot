@@ -6,7 +6,6 @@ cmake
 cpupower
 discord
 efibootmgr
-emacs-wayland
 etterna-git
 firefox
 foot
@@ -24,13 +23,15 @@ mako
 man-db
 man-pages
 mpv
-neovim
+neatvi-git
 networkmanager
+nnn
 obs-pipewire-audio-capture
 obs-studio
 obs-vkcapture
 osu-lazer-bin
 otf-ipafont
+piper
 pipewire
 pipewire-alsa
 pipewire-pulse

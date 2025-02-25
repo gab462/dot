@@ -1,6 +1,6 @@
-export EDITOR=nvim
-export MANPAGER='nvim +Man!'
-export AUR_PAGER=nvim
+export EDITOR=neatvi
+export MANPAGER=less
+export AUR_PAGER='nnn -e'
 export PATH=$PATH:/home/me/bin
 export HISTCONTROL=ignorespace
 

@@ -9,6 +9,7 @@ efibootmgr
 etterna-git
 firefox
 foot
+fwupd
 gamescope
 gdb
 git
@@ -44,6 +45,7 @@ swaybg
 terminus-font
 ttf-envycoder-nerd
 ttf-liberation
+udisks2
 valgrind
 vulkan-intel
 wireplumber

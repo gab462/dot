@@ -1,8 +1,15 @@
 {
   "SKIP_HOST_UPDATE": true,
   "chromiumSwitches": {},
-  "IS_MAXIMIZED": true,
+  "IS_MAXIMIZED": false,
   "IS_MINIMIZED": false,
   "OPEN_ON_STARTUP": false,
-  "MINIMIZE_TO_TRAY": false
+  "MINIMIZE_TO_TRAY": false,
+  "BACKGROUND_COLOR": "#2b2d31",
+  "WINDOW_BOUNDS": {
+    "x": 76,
+    "y": 331,
+    "width": 1280,
+    "height": 674
+  }
 }

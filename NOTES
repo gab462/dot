@@ -1,6 +1,7 @@
 # systemctl enable cpupower
 # add user to realtime group
 # setup aurutils local repo
+# create ~/font dir
 
 test vaapi: mpv --hwdec=auto [vid]
 temporary install: pacman -S --asdeps [pkg]

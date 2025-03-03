@@ -2,5 +2,12 @@
 
 export PATH=/usr/lib/plan9/bin:$PATH
 export SHELL=rc
+export PAGER=nobs
+export EDITOR=E
 
-exec rio
+plumber &
+fontsrv -m $PWD/font &
+
+export font=./font/GoMonoNF/18a/font
+
+rio

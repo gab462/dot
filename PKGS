@@ -47,6 +47,7 @@ sway-contrib
 swaybg
 terminus-font
 ttf-envycoder-nerd
+ttf-go-nerd
 ttf-liberation
 udisks2
 valgrind
@@ -56,5 +57,6 @@ wl-clipboard
 wmenu
 xdg-desktop-portal-wlr
 xorg-xinit
+xorg-xsetroot
 xorg-xwayland
 zram-generator

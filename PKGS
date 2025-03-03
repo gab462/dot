@@ -13,8 +13,10 @@ fwupd
 gamescope
 gdb
 git
+go
 htop
 imv
+inetutils
 intel-media-driver
 intel-ucode
 liberica-jdk-17-full-bin
@@ -37,6 +39,7 @@ pipewire
 pipewire-alsa
 pipewire-pulse
 pipewire-screenaudio
+plan9port
 realtime-privileges
 steam
 sway
@@ -52,5 +55,6 @@ wireplumber
 wl-clipboard
 wmenu
 xdg-desktop-portal-wlr
+xorg-xinit
 xorg-xwayland
 zram-generator

@@ -10,4 +10,6 @@ fontsrv -m $PWD/font &
 
 export font=./font/GoMonoNF/18a/font
 
+setxkbmap -option ctrl:nocaps &
+
 rio

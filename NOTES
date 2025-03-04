@@ -1,4 +1,5 @@
 # systemctl enable cpupower
+# systemctl enable greetd
 # add user to realtime group
 # setup aurutils local repo
 # create ~/font dir

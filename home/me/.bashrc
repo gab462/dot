@@ -1,3 +1,9 @@
+export EDITOR=neatvi
+export MANPAGER=less
+export AUR_PAGER='nnn -e'
+export PATH=$PATH:/home/me/bin
+export HISTCONTROL=ignorespace
+
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'

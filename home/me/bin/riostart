@@ -1,14 +1,14 @@
 #!/bin/sh
 
-export PATH=/usr/lib/plan9/bin:$PATH
+export PATH=/usr/lib/plan9/bin:$PATH:/home/me/bin
 export SHELL=rc
 export PAGER=nobs
 export EDITOR=E
 
 plumber &
-fontsrv -m $PWD/font &
+fontsrv -m /home/me/font &
 
-export font=./font/GoMonoNF/18a/font
+export font=/home/me/font/GoMonoNF/18a/font
 
 setxkbmap -option ctrl:nocaps &
 

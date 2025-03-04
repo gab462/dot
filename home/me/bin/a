@@ -3,4 +3,4 @@
 pgrep '^plumber' || plumber &
 pgrep '^fontsrv' || fontsrv -m $HOME/font &
 
-acme -a -f ./font/GoMonoNF/18a/font -F ./font/GoMonoNF/18a/font
+acme -a -f /home/me/font/GoMonoNF/18a/font -F ./font/GoMonoNF/18a/font

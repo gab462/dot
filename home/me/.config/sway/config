@@ -134,7 +134,7 @@ bar {
 
     font pango:Monospace 18
 
-    status_command while swaystatus; do sleep 1; done
+    status_command while i3status; do sleep 1; done
 
     colors {
         statusline #ffffff

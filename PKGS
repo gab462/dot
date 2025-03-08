@@ -17,6 +17,7 @@ go
 greetd
 greetd-gtkgreet
 htop
+i3status
 imv
 inetutils
 intel-media-driver
